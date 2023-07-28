@@ -1,0 +1,91 @@
+
+<%- include('template/header') %>
+<%- include('template/nav') %>
+
+<div class="container-fluid m-0 p-2 ">
+
+    <h1 class="display-1 text-center ">Lotti produzione</h1>
+
+    <div class="collapse" id="formInvio">
+        <div class="form " method="post" action="lottiProduzione.php">
+            
+            <div class="row gx-3">
+                <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                    <input class="form-control input-sm" type="text" id="codiceLottoProduzione" name="codiceLottoProduzione" placeholder="Codice lotto">
+                </div>
+
+                <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                    <input class="form-control input-sm" type="date" id="dataProduzione" name="dataProduzione">
+                </div>
+            </div>
+            
+            <div class="row gx-3 p-0">
+                
+                <div class="form-group col-md-6 px-2 my-2">
+                    <div class="input-group ">
+                        
+                        <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
+                        <select class="form-select form-select-sm " aria-label="Default select example">
+                        <option selected>Prodotto</option>
+
+                        
+                            <option value="" name="categoria" id="">prod1</option>
+                         
+                        
+                        </select>
+                    </div>
+                        <input class="form-control input-sm" type="number" id="quantitaProdotto" name="quantitaProdotto" placeholder="Quantità">                           
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                <input class="form-control input-sm" type="date" id="dataScadenzaProduzione" name="dataScadenzaProduzione">
+                </div>
+
+                <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">inserisci</button>
+            </div>  
+        </div>
+    </div>
+                            
+    <div class="row col-md-4 p-4 m-auto">
+        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#formInvio" aria-expanded="false" aria-controls="formInvio">Aggiungi Prodotto</button>
+    </div>
+
+    <table class="table table-secondary table-striped-columns w-auto m-auto">
+        <thead>
+            <tr> 
+                <th scope="col">Codice lotto</th>
+                <th scope="col">Prodotto</th>
+                <th scope="col">Quantità</th>
+                <th scope="col">Data produzione</th>
+                <th scope="col">Data scadenza</th>
+                
+                
+                <th scope="col" class="text-center">Elimina</th>
+                <th scope="col" class="text-center">Modifica</th>
+            </tr>
+        </thead>
+        
+        <tbody id='listaArticoli' name='listaArticoli'> 
+            <tr>
+                <td>#30302</td>
+                <td>Prodotto bello</td>
+                <td>100</td>
+                <td>12/12/12</td>
+                <td>12/12/12</td>
+                
+                <td class="text-center"style="width: 30px;">
+                    <a href="#"><i class="fas fa-trash"></i></a>
+                </td>
+                <td class="text-center"style="width: 30px;">
+                    <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<%- include('template/footer') %>  
+   
+  

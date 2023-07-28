@@ -1,0 +1,138 @@
+<%- include('template/header') %>
+<%- include('template/nav') %>
+
+
+<div class="container-fluid m-0 p-2">
+
+    <h1 class="text-center">Gestione Clienti e Fornitori</h1>
+
+    <div class="collapse" id="formInvio">
+
+        <div class="form " method="post" action="#">
+                
+            <div class="row gx-3">   
+
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="ragione_sociale" class="form-label">Ragione Sociale:</label>
+                    <input type="text" class="form-control" id="ragione_sociale" name="ragione_sociale">
+                </div>
+
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="partita_iva" class="form-label">Partita IVA:</label>
+                    <input type="text" class="form-control" id="partita_iva" name="partita_iva">
+                </div>
+
+            </div>
+
+            <div class="row gx-3">
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="indirizzo" class="form-label">Indirizzo:</label>
+                    <input type="text" class="form-control" id="indirizzo" name="indirizzo">
+                </div>
+
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="citta" class="form-label">Città:</label>
+                    <input type="text" class="form-control" id="citta" name="citta">
+                </div>
+
+            </div>
+
+            <div class="row gx-3">
+                
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="sigla_provincia" class="form-label">Provincia:</label>
+                    <input type="text" class="form-control" id="sigla_provincia" name="sigla_provincia">
+                </div>
+
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="cap" class="form-label">CAP:</label>
+                    <input type="text" class="form-control" id="cap" name="cap">
+                </div>
+
+            </div>
+            <div class="row gx-3">
+
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+
+                <div class="form-group  col-xs-auto col-md-6 p-2">
+                    <label for="numero_telefono" class="form-label">Numero di Telefono:</label>
+                    <input type="tel" class="form-control" id="numero_telefono" name="numero_telefono">
+                </div>
+
+            </div>
+            <div class="row gx-3">
+                
+
+                <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">inserisci</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row col-md-4 p-4 m-auto">
+        <button class="btn btn-outline-secondary btn-sm " type="button" data-bs-toggle="collapse" data-bs-target="#formInvio" aria-expanded="false" aria-controls="formInvio">
+            Form invio dati
+        </button>
+    </div>
+            
+        <table class="table table-secondary table-striped-columns w-auto m-auto">
+            <thead>
+                <tr>
+                    <th>Ragione Sociale</th>
+                    <th>Indirizzo</th>
+                    <th>CAP</th>
+                    <th>Città</th>
+                    <th>Provincia</th>
+                    <th>Partita IVA</th>
+                    <th>Numero di Telefono</th>
+                    <th>Email</th>
+                    <th>Elimina</th>
+                    <th>Modifica</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                <tr>
+                    <td>Nome Cliente/Fornitore 1</td>
+                    <td>Via Roma, 1</td>
+                    <td>00100</td>
+                    <td>Roma</td>
+                    <td>RM</td>
+                    <td>12345678901</td>
+                    <td>+39 1234567890</td>
+                    <td>cliente1@example.com</td>
+                    <td class="text-center"style="width: 30px;">
+                        <a href="#"><i class="fas fa-trash"></i></a>
+                    </td>
+                    <td class="text-center"style="width: 30px;">
+                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nome Cliente/Fornitore 2</td>
+                    <td>Via Milano, 10</td>
+                    <td>20100</td>
+                    <td>Milano</td>
+                    <td>MI</td>
+                    <td>98765432109</td>
+                    <td>+39 9876543210</td>
+                    <td>fornitore2@example.com</td>
+                    <td class="text-center"style="width: 30px;">
+                        <a href="#"><i class="fas fa-trash"></i></a>
+                    </td>
+                    <td class="text-center"style="width: 30px;">
+                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    
+</div>
+
+<%- include('template/footer') %>  
