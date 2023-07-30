@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const page =  require('./routes/page');
+const page = require('./routes/pageRoutes');
+const crud = require('./routes/postRoutes');
 const port = 3000;
 
 
@@ -12,8 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', express.static(path.join(__dirname, '/public')));
 
+app.use(express.json());
 
-app.use('/', page);
+
+
+app.use('/', page, crud);
 app.use('/listaArticoli', page);
 app.use('/anagraficaClientiFornitori', page);
 app.use('/gestioneRisorse', page);
@@ -21,6 +25,16 @@ app.use('/listaProdotti', page);
 app.use('/lottiProduzione', page);
 
 app.set('view engine', 'ejs');
+
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  console.log(err.name);
+  console.log(err.code);
+
+  res.status(500).json({
+    message: "Something went rely wrong",
+  });
+});
 
 
 
