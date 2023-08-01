@@ -12,8 +12,14 @@ exports.getAllcategorie = async (req, res, next) => {
 exports.creaNuovaCategoria = async (req, res, next) => {
   try {
     let item = req.body.categoriaAggiunta;
-    let categoria = new Categoria(item);
-    categoria = await categoria.crea();
+    if(item !== "" ){
+      let categoria = new Categoria(item);
+      categoria = await categoria.crea();
+      //aggiungere avviso invio
+    }else{
+      //aggiungere avviso non invio
+      console.log("item vuoto, non inviato");
+    }
 
     //res.status(201).json({ message: "Categoria creata" });
     res.redirect("/gestioneRisorse");
@@ -28,7 +34,7 @@ exports.getCategoriaById = async (req, res, next) => {
     console.log(categoriaId);
     //let [categoria, _] = await Categoria.trovaById(categoriaId);
 
-    res.status(200).json({ post: categoria });
+    //res.status(200).json({ post: categoria });
   } catch (error) {
     next(error); 
   }
@@ -50,7 +56,7 @@ exports.getCategoriaById = async (req, res, next) => {
     try{
       let categoriaId = req.params.id;
 
-      await Categoria.delete(categoriaId);
+      //await Categoria.delete(categoriaId);
 
       res.status(200).json({message: "aggiornato con successo" });
     }catch (error) {
