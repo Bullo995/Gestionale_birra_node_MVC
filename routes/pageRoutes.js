@@ -14,11 +14,11 @@ router.get('/listaArticoli', function(req, res){
 router.get('/anagraficaClientiFornitori', function(req, res){
     res.render('anagraficaClientiFornitori');
 });
-
+/*
 router.get('/gestioneRisorse', function(req, res){
     res.render('gestioneRisorse');
 });
-
+*/
 router.get('/listaProdotti', function(req, res){
     res.render('listaProdotti');
 });

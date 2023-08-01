@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const page = require('./routes/pageRoutes');
-const crud = require('./routes/postRoutes');
+const categoriaRoute = require('./routes/categoriaRoutes');
 const port = 3000;
 
 
@@ -17,12 +17,12 @@ app.use(express.json());
 
 
 
-app.use('/', page, crud);
-app.use('/listaArticoli', page);
-app.use('/anagraficaClientiFornitori', page);
-app.use('/gestioneRisorse', page);
-app.use('/listaProdotti', page);
-app.use('/lottiProduzione', page);
+app.use('/', page, categoriaRoute);
+//app.use('/listaArticoli', categoriaRoute);
+//app.use('/anagraficaClientiFornitori', categoriaRoute); 
+//app.use('/gestioneRisorse', categoriaRoute);
+//app.use('/listaProdotti', categoriaRoute);
+//app.use('/lottiProduzione', categoriaRoute);
 
 app.set('view engine', 'ejs');
 

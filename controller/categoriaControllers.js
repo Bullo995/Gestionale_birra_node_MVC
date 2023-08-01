@@ -2,9 +2,8 @@ const Categoria = require("../models/Categoria");
 
 exports.getAllcategorie = async (req, res, next) => {
   try {
-    const [categoria, _] = await Categoria.trovaTutti();
-
-    res.status(200).json({ count: categoria.length, categoria });
+    const [rows] = await Categoria.trovaTutti();
+    res.render("gestioneRisorse", { categorie: rows });
   } catch (error) {
     next(error);
   }
@@ -12,11 +11,12 @@ exports.getAllcategorie = async (req, res, next) => {
 
 exports.creaNuovaCategoria = async (req, res, next) => {
   try {
-    let item = req.body.categoria;
+    let item = req.body.categoriaAggiunta;
     let categoria = new Categoria(item);
     categoria = await categoria.crea();
 
-    res.status(201).json({ message: "Categoria creata" });
+    //res.status(201).json({ message: "Categoria creata" });
+    res.redirect("/gestioneRisorse");
   } catch (error) {
     next(error);
   }
@@ -25,8 +25,8 @@ exports.creaNuovaCategoria = async (req, res, next) => {
 exports.getCategoriaById = async (req, res, next) => {
   try {
     let categoriaId = req.params.id;
-
-    let [categoria, _] = await Categoria.trovaById(categoriaId);
+    console.log(categoriaId);
+    //let [categoria, _] = await Categoria.trovaById(categoriaId);
 
     res.status(200).json({ post: categoria });
   } catch (error) {
