@@ -8,16 +8,5 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
-/*
-let sql = "SELECT * FROM categorie;";
 
-pool.execute(sql, (err, result) =>{
-  if(err) throw err;
-
-  result.forEach((res)=>{
-    console.log(res.categoria);
-  });
-
-});
-*/
 module.exports = pool.promise();

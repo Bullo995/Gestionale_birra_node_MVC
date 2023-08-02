@@ -32,9 +32,9 @@ exports.getCategoriaById = async (req, res, next) => {
   try {
     let categoriaId = req.params.id;
     console.log(categoriaId);
-    //let [categoria, _] = await Categoria.trovaById(categoriaId);
+    let [categoria, _] = await Categoria.trovaById(categoriaId);
 
-    //res.status(200).json({ post: categoria });
+    res.status(200).json({ post: categoria });
   } catch (error) {
     next(error); 
   }
@@ -56,7 +56,7 @@ exports.getCategoriaById = async (req, res, next) => {
     try{
       let categoriaId = req.params.id;
 
-      //await Categoria.delete(categoriaId);
+      await Categoria.delete(categoriaId);
 
       res.status(200).json({message: "aggiornato con successo" });
     }catch (error) {
