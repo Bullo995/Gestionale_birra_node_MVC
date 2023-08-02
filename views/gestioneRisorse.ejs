@@ -5,7 +5,9 @@
 <div class="container-fluid text-center">
     <h1 class="text-center">Gestione Risorse</h1>
     
-    <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
+    
+    <div class="form-group m-sm-auto  col-md-6 px-2 my-2">  
+        <h3>categorie</h3>
         <div class="btn-group" role="group" aria-label="Basic outlined example"> 
             <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
                 <option selected>Categoria</option>
@@ -22,6 +24,61 @@
                 Elimina
               </a>
         </div>
+
+        <h3>sottocategorie</h3>
+        <div class="btn-group" role="group" aria-label="Basic outlined example"> 
+          <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
+              <option selected>sottocategorie</option>
+              <% if (sottocategorie) { %>
+                  <% sottocategorie.forEach(element => { %>
+                      <option value="<%= element.id_sottocategoria %>"><%= element.sottocategoria %></option>
+                  <% }) %>
+              <% } %>
+          </select>
+            <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
+              Modifica
+            </a>
+            <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
+              Elimina
+            </a>
+       </div>
+
+       <h3>unita misura</h3>
+        <div class="btn-group" role="group" aria-label="Basic outlined example"> 
+          <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
+              <option selected>unita misura</option>
+              <% if (unitaMisura) { %>
+                  <% unitaMisura.forEach(element => { %>
+                      <option value="<%= element.id_unita_misura %>"><%= element.unita_misura %></option>
+                  <% }) %>
+              <% } %>
+          </select>
+            <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
+              Modifica
+            </a>
+            <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
+              Elimina
+            </a>
+        </div>
+
+        <h3>causali</h3>
+        <div class="btn-group" role="group" aria-label="Basic outlined example"> 
+          <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
+              <option selected>Categoria</option>
+              <% if (categorie) { %>
+                  <% categorie.forEach(element => { %>
+                      <option value="<%= element.id_categoria %>"><%= element.categoria %></option>
+                  <% }) %>
+              <% } %>
+          </select>
+            <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
+              Modifica
+            </a>
+            <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
+              Elimina
+            </a>
+        </div>
+
     </div>
     
  

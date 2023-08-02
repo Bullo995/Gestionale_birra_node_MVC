@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const categoriaControllers = require("../controller/categoriaControllers");
+const page = require("../controller/gestioneRisorse/index");
+const categoriaControllers = require("../controller/gestioneRisorse/categoriaControllers");
 
 router
-  .get('/',categoriaControllers.getAllcategorie)
+  .get('/',page.render)
   .post("/add",categoriaControllers.creaNuovaCategoria)
   .get("/edit/:id",categoriaControllers.getCategoriaById)
   .put("/update/:id",categoriaControllers.aggiornaCategoria)
-  .delete("/delete/:id",categoriaControllers.cancellaCategoria);  
+  .delete("/deleteCategoria/:id",categoriaControllers.cancellaCategoria);  
 
 module.exports = router;
