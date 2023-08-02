@@ -1,14 +1,5 @@
 const Categoria = require("../../models/Categoria");
-/*
-exports.getAllcategorie = async (req, res, next) => {
-  try {
-    const [rows] = await Categoria.trovaTutti();
-    res.render("gestioneRisorse", { categorie: rows });
-  } catch (error) {
-    next(error);
-  }
-};
-*/
+
 exports.creaNuovaCategoria = async (req, res, next) => {
   try {
     let item = req.body.categoriaAggiunta;

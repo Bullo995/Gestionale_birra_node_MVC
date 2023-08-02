@@ -50,7 +50,7 @@ class Sottocategoria {
     UPDATE sottocategorie
     SET sottocategoria = ?
     SET id_categoria = ?
-    WHERE id_categoria = ?
+    WHERE id_ = sottocategoria ?
     `;
 
     return db.execute(sql, [sottocategoria, id, idCategoria]);
