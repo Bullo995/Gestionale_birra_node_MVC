@@ -28,7 +28,8 @@ class Categoria {
   static trovaById(id) {
     let sql = 
     `SELECT * FROM categorie 
-     WHERE id_categoria = ?;`;
+     WHERE id_categoria = ?;
+     `;
 
     return db.execute(sql,[id]); 
   }
@@ -38,9 +39,8 @@ class Categoria {
     let sql = `
     UPDATE categorie
     SET categoria = ?
-    WHERE id_categoria = ?
+    WHERE id_categoria = ?;
     `;
-
     return db.execute(sql, [categoria, id]);
   }
 
@@ -48,7 +48,8 @@ class Categoria {
 
     let sql =`
     DELETE FROM categorie 
-    WHERE id_categoria = ?`;
+    WHERE id_categoria = ?;
+    `;
 
     return db.execute(sql, [id]);
   }

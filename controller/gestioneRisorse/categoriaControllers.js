@@ -21,11 +21,13 @@ exports.creaNuovaCategoria = async (req, res, next) => {
 
 exports.getCategoriaById = async (req, res, next) => {
   try {
-    let categoriaId = req.params.id;
-    console.log(categoriaId);
-    let [categoria, _] = await Categoria.trovaById(categoriaId);
 
-    res.status(200).json({ post: categoria });
+    let categoriaId = req.params.id;
+
+    let [categoria, _] = await Categoria.trovaById(categoriaId);
+    
+    res.status(200).json({ dati: categoria });
+
   } catch (error) {
     next(error); 
   }
@@ -33,11 +35,11 @@ exports.getCategoriaById = async (req, res, next) => {
   exports.aggiornaCategoria = async (req, res, next) =>{
     try{
       let categoriaId = req.params.id;
-      let {categoria} = req.body;
-
-      await Categoria.update(categoriaId,categoria);
-
-      res.status(200).json({message: "aggiornato con successo" });
+      let categoria = req.body.contenuto;
+      
+      await Categoria.update(categoriaId, categoria);
+      //res.status(200).json({message: "aggiornato con successo" });
+      res.redirect("/gestioneRisorse");
     }catch (error) { 
       next(error);
     }
@@ -46,10 +48,11 @@ exports.getCategoriaById = async (req, res, next) => {
   exports.cancellaCategoria = async (req, res, next) =>{
     try{
       let categoriaId = req.params.id;
-
+      console.log(categoriaId);
       await Categoria.delete(categoriaId);
 
-      res.status(200).json({message: "aggiornato con successo" });
+      //res.status(200).json({message: "aggiornato con successo" });
+      res.redirect("/gestioneRisorse");
     }catch (error) {
       next(error);
     }

@@ -18,7 +18,6 @@ exports.render = async (req, res, next) => {
          unitaMisura:unitaMisura,
          causali:causali 
         });
-
     } catch (error) {
       next(error);
     }

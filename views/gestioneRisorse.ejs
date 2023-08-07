@@ -9,85 +9,135 @@
     <div class="form-group m-sm-auto  col-md-6 px-2 my-2">  
         <h3>categorie</h3>
         <div class="btn-group" role="group" aria-label="Basic outlined example"> 
-            <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
-                <option selected>Categoria</option>
+            <select id="Categoria" name="Categoria" class="form-select form-select-sm " aria-label="Categorie">
+                <option value="" class="d-none" selected>Categoria</option>
                 <% if (categorie) { %>
                     <% categorie.forEach(element => { %>
                         <option value="<%= element.id_categoria %>"><%= element.categoria %></option>
                     <% }) %>
                 <% } %>
             </select>
-              <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
-                Modifica
-              </a>
-              <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
-                Elimina
-              </a>
+            <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#editModal" 
+            data-bs-whatever="Categoria">
+              Modifica
+          </button>
+
+          <button 
+            type="button" 
+            class="btn btn-primary"
+            data-bs-toggle="modal" 
+            data-bs-target="#deleteModal" 
+            data-bs-whatever="Categoria">
+              Elimina
+          </button>
+
         </div>
 
         <h3>sottocategorie</h3>
         <div class="btn-group" role="group" aria-label="Basic outlined example"> 
-          <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
-              <option selected>sottocategorie</option>
+          <select id="Sottocategoria" name="Sottocategoria" class="form-select form-select-sm " aria-label="sottocategorie">
+              <option value="" class="d-none" selected>Sottocategoria</option>
               <% if (sottocategorie) { %>
                   <% sottocategorie.forEach(element => { %>
                       <option value="<%= element.id_sottocategoria %>"><%= element.sottocategoria %></option>
                   <% }) %>
               <% } %>
           </select>
-            <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
+
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#editModal" 
+            data-bs-whatever="Sottocategoria">
               Modifica
-            </a>
-            <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
+          </button>
+
+          <button 
+            type="button" 
+            class="btn btn-primary"
+            data-bs-toggle="modal" 
+            data-bs-target="#deleteModal" 
+            data-bs-whatever="Sottocategoria">
               Elimina
-            </a>
+          </button>
+
+        
        </div>
 
        <h3>unita misura</h3>
         <div class="btn-group" role="group" aria-label="Basic outlined example"> 
-          <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
-              <option selected>unita misura</option>
+          <select id="Unita" name="Unita" class="form-select form-select-sm" aria-label="unitaMisura">
+              <option value="" class="d-none">Unita</option>
               <% if (unitaMisura) { %>
                   <% unitaMisura.forEach(element => { %>
                       <option value="<%= element.id_unita_misura %>"><%= element.unita_misura %></option>
                   <% }) %>
               <% } %>
           </select>
-            <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
+
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#editModal" 
+            data-bs-whatever="Unita">
               Modifica
-            </a>
-            <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
+          </button>
+
+          <button 
+            type="button" 
+            class="btn btn-primary"
+            data-bs-toggle="modal" 
+            data-bs-target="#deleteModal" 
+            data-bs-whatever="Unita">
               Elimina
-            </a>
+          </button>
+
+          
         </div>
 
         <h3>causali</h3>
         <div class="btn-group" role="group" aria-label="Basic outlined example"> 
-          <select id="selectCat" name="selectCat" class="form-select form-select-sm " aria-label="Categorie">
-              <option selected>Categoria</option>
+          <select id="Causale" name="Causale" class="form-select form-select-sm " aria-label="Causale">
+              <option value="" class="d-none" selected>Causali</option>
               <% if (causali) { %>
                   <% causali.forEach(element => { %>
-                      <option value="<%= causali.id_causale %>"><%= element.causale %></option>
+                      <option value="<%=element.id_causale%>"><%= element.causale %></option>
                   <% }) %>
               <% } %>
           </select>
-            <a href="gestioneRisorse/edit/" class="btn btn-outline-primary">
+
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#editModal" 
+            data-bs-whatever="Causale">
               Modifica
-            </a>
-            <a href="gestioneRisorse/delete/" class="btn btn-outline-primary">
+          </button>
+
+          <button 
+            type="button" 
+            class="btn btn-primary"
+            data-bs-toggle="modal" 
+            data-bs-target="#deleteModal" 
+            data-bs-whatever="Causale">
               Elimina
-            </a>
+          </button>
+
         </div>
 
     </div>
-    
- 
-    
 
    
     <div class="container">
         <div class="col-6 m-auto pt-3">    
-            <form class="form" method="POST" action="/gestioneRisorse/add">
+            <form class="form" method="POST" action="/gestioneRisorse/categoriaAdd">
                 
               <div class="mb-3">
                 <label for="categoriaAggiunta" class="form-label">Categorie</label>
@@ -99,42 +149,56 @@
             </form>
         </div>
     </div>
-
-  
-   
-      
+    
                                     
   <div class="container">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@">Open modal for @getbootstrap</button>
     
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+            <h1 class="modal-title fs-5" id="editModalLabel"></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="#" method="PUT">
-              <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                <input type="text" class="form-control" id="recipient-name">
+            <form class="form-group" id="formUpdate" method="post">
+              <div class="pb-3 col-5 m-auto">
+                <input type="text" name="contenuto" class="form-control" id="recipient-name">
               </div>
-              <div class="mb-3">
-                <label for="message-text" class="col-form-label">Message:</label>
-                <textarea class="form-control" id="message-text"></textarea>
-              </div>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+              <button type="submit" class="btn btn-primary">Modifica</button>
             </form>
+          </div>        
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send message</button>
+          <div class="modal-body">
+
+            <form class="form-group" id="formDelete" method="get">
+  
+              <h3>Sei sicuro di voler eliminare?</h3>
+              
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+              <button type="submit" class="btn btn-primary" >Elimina</button>
+              
+            </form>
           </div>
         </div>
       </div>
     </div>
+    
+    
+
+
   </div>    
 
    
