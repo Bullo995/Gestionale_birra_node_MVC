@@ -14,7 +14,7 @@ class Sottocategoria {
         id_categoria
     )
     VALUES(
-      '${this.categoria}',
+      '${this.sottocategoria}',
       '${this.idCategoria}'
     )
     `;
@@ -22,7 +22,7 @@ class Sottocategoria {
     return db.execute(sql);
   }
 
-  static trovaByCategoria(){
+  static trovaByCategoria(idCategoria){
     let sql = `
     SELECT * FROM sottocategorie
     WHERE id_categoria = ?
@@ -48,12 +48,11 @@ class Sottocategoria {
 
     let sql = `
     UPDATE sottocategorie
-    SET sottocategoria = ?
-    SET id_categoria = ?
-    WHERE id_ = sottocategoria ?
+    SET sottocategoria = ?, id_categoria = ?
+    WHERE id_sottocategoria = ?
     `;
 
-    return db.execute(sql, [sottocategoria, id, idCategoria]);
+    return db.execute(sql, [sottocategoria, idCategoria, id ]);
   }
 
   static delete(id){

@@ -2,7 +2,7 @@ const db = require("../config/db");
 
 class UnitaMisura {
   constructor(unitaMisura) {
-    this.categoria = unitaMisura;
+    this.unitaMisura = unitaMisura;
   }
 
   crea() {
