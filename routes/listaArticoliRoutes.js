@@ -3,10 +3,10 @@ const router = express.Router();
 const Controller = require("../controller/listaArticoliControllers");
 
 router
-  .get('/',Controller.getAll);
-  /*.post("/add",Controller)
-  .get("/edit/:id",Controller)
-  .put("/update/:id",Controller)
-  .delete("/delete/:id",Controller);*/  
+  .get('/',Controller.getAll)
+  .post("/add",Controller.creaNuovoArticolo)
+  .get("/delete/:id",Controller.cancellaArticolo)
+  .get("/edit/:id",Controller.getArticoloById)
+  .post("/update/:id",Controller.aggiornaArticolo);
 
 module.exports = router;

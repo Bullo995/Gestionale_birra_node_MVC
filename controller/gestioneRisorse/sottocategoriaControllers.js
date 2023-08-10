@@ -24,7 +24,6 @@ exports.getSottocategoriaByCat = async (req, res, next) => {
     try {
         
       let categoriaId = req.params.id;
-        console.log(categoriaId);
       let [sottocategoria, _] = await Sottocategoria.trovaByCategoria(categoriaId);
       
       res.status(200).json({ dati: sottocategoria });

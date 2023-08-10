@@ -11,12 +11,10 @@ class Causale {
     INSERT INTO causali(
         causale
     )
-    VALUES(
-      '${this.causale}'
-    )
+    VALUES(?)
     `;
 
-    return db.execute(sql);
+    return db.execute(sql,[this.causale]);
   }
 
   static trovaTutti() {

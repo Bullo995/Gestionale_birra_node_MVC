@@ -19,6 +19,16 @@ exports.creaNuovaUnitaMisura = async (req, res, next) => {
   }
 };
 
+exports.getAllUnitaMisura = async (req, res, next) => {
+  try {
+    const [unitaMisura] = await UnitaM.trovaTutti();
+
+    res.status(200).json({ dati: unitaMisura });
+  } catch (error) {
+    next(error);
+  }
+}
+
 exports.getUnitaMisuraById = async (req, res, next) => {
   try {
 

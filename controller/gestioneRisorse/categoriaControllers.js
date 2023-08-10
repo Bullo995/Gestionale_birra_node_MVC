@@ -57,7 +57,6 @@ exports.getCategoriaById = async (req, res, next) => {
   exports.cancellaCategoria = async (req, res, next) =>{
     try{
       let categoriaId = req.params.id;
-      console.log(categoriaId);
       await Categoria.delete(categoriaId);
 
       //res.status(200).json({message: "aggiornato con successo" });

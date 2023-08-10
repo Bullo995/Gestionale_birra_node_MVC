@@ -20,6 +20,7 @@ router
   .post("/SottocategoriaUpdate/:id",sottocategoriaControllers.aggiornaSottocategoria)
   .get("/SottocategoriaDelete/:id",sottocategoriaControllers.cancellaSottocategoria)
 
+  .get("/UnitaAll",unitaMisuraControllers.getAllUnitaMisura)
   .post("/UnitaAdd",unitaMisuraControllers.creaNuovaUnitaMisura)
   .get("/UnitaEdit/:id",unitaMisuraControllers.getUnitaMisuraById)
   .post("/UnitaUpdate/:id",unitaMisuraControllers.aggiornaUnitaMisura)

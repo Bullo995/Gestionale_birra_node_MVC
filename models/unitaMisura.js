@@ -11,12 +11,10 @@ class UnitaMisura {
     INSERT INTO unita_misura(
         unita_misura
     )
-    VALUES(
-      '${this.unitaMisura}'
-    )
+    VALUES(?)
     `;
 
-    return db.execute(sql);
+    return db.execute(sql,[this.unitaMisura]);
   }
 
   static trovaTutti() {

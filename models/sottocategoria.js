@@ -13,13 +13,10 @@ class Sottocategoria {
         sottocategoria,
         id_categoria
     )
-    VALUES(
-      '${this.sottocategoria}',
-      '${this.idCategoria}'
-    )
+    VALUES(?, ?)
     `;
 
-    return db.execute(sql);
+    return db.execute(sql,[this.sottocategoria,this.idCategoria]);
   }
 
   static trovaByCategoria(idCategoria){

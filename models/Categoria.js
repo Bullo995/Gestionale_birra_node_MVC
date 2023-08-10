@@ -11,12 +11,10 @@ class Categoria {
     INSERT INTO categorie(
       categoria
     )
-    VALUES(
-      '${this.categoria}'
-    )
+    VALUES(?)
     `;
 
-    return db.execute(sql);
+    return db.execute(sql,[this.categoria]);
   }
 
   static trovaTutti() {

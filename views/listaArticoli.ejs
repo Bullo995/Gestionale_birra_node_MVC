@@ -7,38 +7,30 @@
     <h1 class="display-1 text-center "> Lista articoli</h1>
 
     <div class="collapse" id="formInvio">
-        <div class="form " method="post" action="listaArticoli.php">
+        <form method="post" action="/listaArticoli/add">
 
             <div class="row gx-3">
 
                 <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
-                    <select class="form-select form-select-sm " aria-label="Default select example">
-                        <option selected>Categoria</option>
-
-                        
-                            <option value="#" name="categoria" id="">categoria</option>
-                        
-                        
+                    <select class="form-select form-select-sm " aria-label="Default select example" id="articoloAddCat" name="articoloAddCat">
+                        <option value="" class="d-none" selected>Categoria</option>
                     </select>
                 </div>
 
                 <div class="form-group m-sm-auto col-md-6 px-2 my-2">  
-                    <select class="form-select form-select-sm col-6" aria-label="Default select example">
-                        <option selected>Sottocategoria</option>
-
-                        <option value="#" name="categoria" id="">sottocat</option>    
-                        
+                    <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloAddSottoCat" name="articoloAddSottoCat">
+                        <option value="" class="d-none" selected>Sottocategoria</option>  
                     </select>
                 </div>
             </div>
             
             <div class="row gx-3">
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="text" id="articoloListaArticoli" name="articoloListaArticoli" placeholder="Nome articolo">
+                    <input class="form-control input-sm" type="text" id="articoloAddNome" name="articoloAddNome" placeholder="Nome articolo">
                 </div>
 
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="text" id="descrizioneListaArticoli" name="descrizioneListaArticoli" placeholder="Descrizione">
+                    <input class="form-control input-sm" type="text" id="articoloAddDescrizione" name="articoloAddDescrizione" placeholder="Descrizione">
                 </div>
             </div>
             
@@ -46,18 +38,15 @@
                 
                 <div class="form-group col-md-6 px-2 my-2">
                     <div class="input-group ">
-                        <input class="form-control input-sm" style="width:60%" type="number" id='capacitaListaArticoli' name="capacitaListaArticoli" placeholder="capacità">
-                        <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example">
-                            <option selected>Unita misura</option>
-
-                            <option value="#" name="categoria" id="">unita</option>   
-                    
+                        <input class="form-control input-sm" style="width:60%" type="number" id='articoloAddCapacita' name="articoloAddCapacita" placeholder="capacità">
+                        <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example" id="articoloAddUnita" name="articoloAddUnita">
+                            <option value="" selected>Unita misura</option>
                         </select>                            
                     </div>
                 </div>
                 <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">inserisci</button>
             </div>  
-        </div>
+        </form>
     </div>
                             
     <div class="row col-md-4 p-4 m-auto">
@@ -78,24 +67,31 @@
             </tr>
         </thead>
         
-        <tbody> 
-            <tr>
-                <td>Articolo 1</td>
-                <td>Sottocategoria 1</td>
-                <td>Categoria 1</td>
-                <td>Capacità 1</td>
-                <td>Unità di misura 1</td>
-                <td>Descrizione 1</td>
-                <td class="text-center"style="width: 30px;">
-                    <a href="#"><i class="fas fa-trash"></i></a>
-                </td>
-                <td class="text-center"style="width: 30px;">
-                    <a href="#"><i class="fas fa-pencil-alt"></i></a>
-                </td>
-            </tr>
+        <tbody > 
+
+                <% if (articoli) { %>
+                    <% articoli.forEach(element => { %>
+                        <tr>
+                            <td><%= element.nome_articolo %></td>
+                            <td><%= element.sottocategoria %></td>
+                            <td><%= element.categoria %></td>
+                            <td><%= element.capacita !== null ? element.capacita :"//"%></td>
+                            <td><%= element.unita_misura !== null ? element.unita_misura :"//"%></td>
+                            <td><%= element.descrizione_articolo !== null ? element.descrizione_articolo :"//" %></td>
+                            <td class="text-center"style="width: 30px;">
+                                <a href="/listaArticoli/delete/<%= element.id_articolo %>"><i class="fas fa-trash"></i></a>
+                            </td>
+                            <td class="text-center"style="width: 30px;">
+                                <a href="/listaArticoli/edit/<%= element.id_articolo %>"><i class="fas fa-pencil-alt"></i></a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+
         </tbody>
     </table>
 </div>
 
+<script src="js/listaArticoli.js"></script>
 <%- include('template/footer') %>  
   
