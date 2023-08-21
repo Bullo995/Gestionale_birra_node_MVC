@@ -79,10 +79,21 @@
                             <td><%= element.unita_misura !== null ? element.unita_misura :"//"%></td>
                             <td><%= element.descrizione_articolo !== null ? element.descrizione_articolo :"//" %></td>
                             <td class="text-center"style="width: 30px;">
-                                <a href="/listaArticoli/delete/<%= element.id_articolo %>"><i class="fas fa-trash"></i></a>
+                                <a data-bs-toggle="modal" 
+                                    data-bs-target="#deleteModal" 
+                                    data-bs-whatever="<%= element.id_articolo %>" 
+                                    href="#deleteModal">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
+                                
                             <td class="text-center"style="width: 30px;">
-                                <a href="/listaArticoli/edit/<%= element.id_articolo %>"><i class="fas fa-pencil-alt"></i></a>
+                                <a data-bs-toggle="modal" 
+                                    data-bs-target="#editModal" 
+                                    data-bs-whatever="<%= element.id_articolo %>" 
+                                    href="#editModal">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
                             </td>
                         </tr>
                     <% }) %>
@@ -90,6 +101,98 @@
 
         </tbody>
     </table>
+
+    <div class="container">
+    
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editModalLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="formUpdate" action="/listaArticoli/update">
+
+                            <div class="row gx-3">
+                
+                                <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
+                                    <select class="form-select form-select-sm " aria-label="Default select example" id="articoloUpdateCat" name="articoloUpdateCat">
+                                        <option value="" class="d-none" selected>Categoria</option>
+                                    </select>
+                                </div>
+                
+                                <div class="form-group m-sm-auto col-md-6 px-2 my-2">  
+                                    <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloUpdateSottoCat" name="articoloUpdateSottoCat">
+                                        <option value="" class="d-none" selected>Sottocategoria</option>  
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row gx-3">
+                                <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                    <input class="form-control input-sm" type="text" id="articoloUpdateNome" name="articoloUpdateNome" placeholder="Nome articolo">
+                                </div>
+                
+                                <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                    <input class="form-control input-sm" type="text" id="articoloUpdateDescrizione" name="articoloUpdateDescrizione" placeholder="Descrizione">
+                                </div>
+                            </div>
+                            
+                            <div class="row gx-3 p-0">
+                                
+                                <div class="form-group col-md-6 px-2 my-2">
+                                    <div class="input-group ">
+                                        <input class="form-control input-sm" style="width:60%" type="number" id='articoloUpdateCapacita' name="articoloUpdateCapacita" placeholder="capacità">
+                                        <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example" id="articoloUpdateUnita" name="articoloUpdateUnita">
+                                            <option value="" selected>Unita misura</option>
+                                        </select>                            
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-md col-md-3 m-auto" data-bs-dismiss="modal">Anulla</button>
+                                <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
+                            </div>  
+                        </form>
+
+                       <!-- <form class="form-group" id="formUpdate" method="post">
+                        <div class="pb-3 col-5 m-auto">
+                            <input type="text" name="contenuto" class="form-control" id="recipient-name">
+                            <select id="categoriaModSotto" name="categoriaModSotto" class="form-select form-select-sm d-none" aria-label="categoriaModSotto" >
+            
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                        <button type="submit" class="btn btn-primary">Modifica</button>
+                        </form>-->
+                    </div>        
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+            
+                        <form class="form-group" id="formDelete" method="get">
+                
+                            <h3>Sei sicuro di voler eliminare?</h3>
+                            
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                            <button type="submit" class="btn btn-primary" >Elimina</button>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
+
 </div>
 
 <script src="js/listaArticoli.js"></script>

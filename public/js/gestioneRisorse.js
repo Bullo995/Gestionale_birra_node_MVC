@@ -66,7 +66,7 @@ if (editModal) {
             fetch(pagePath+`/CategoriaAll`)
             .then(response => response.json())
             .then(data =>{
-              categorie = data.dati;
+              const categorie = data.dati;
               
               categorie.forEach(element => {
       

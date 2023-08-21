@@ -40,10 +40,13 @@ class Articolo {
         return db.execute(sql);
     }
     static trovaById(id){
-
+        
         let sql =`
-        SELECT * FROM anagrafiche_articoli 
-        WHERE id_articolo = ?`;
+        SELECT aa.*, s.id_categoria
+        FROM anagrafiche_articoli AS aa
+        JOIN sottocategorie AS s
+        ON aa.id_sottocategoria = s.id_sottocategoria 
+        WHERE id_articolo = ?;`;
     
         return db.execute(sql, [id]);
     }
