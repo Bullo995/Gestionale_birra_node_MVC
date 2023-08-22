@@ -34,7 +34,6 @@ class Articolo {
     static trovaTutti(){
         let sql = `
         SELECT * FROM v_cbo_anagrafica_articoli
-        
         ;`;
 
         return db.execute(sql);
@@ -54,7 +53,7 @@ class Articolo {
     static update(id,idSottocategoria, nomeArticolo, descrizione_articolo, capacita, idUnitaM){
 
     let sql =`
-    UPDATE FROM anagrafiche_articoli
+    UPDATE anagrafiche_articoli
     SET
         id_sottocategoria = ?,
         nome_articolo = ?,

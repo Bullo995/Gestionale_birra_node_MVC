@@ -1,14 +1,15 @@
 <%- include('template/header') %>
 <%- include('template/nav') %>
-
+<% const dataOptionsTime = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}; %>
+<% const dataOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }; %>
 
 <div class="container-fluid">
 
     <h1 class="display-3 text-center "> Magazzino articoli</h1>
 
     <div class="collapse" id="formInvio">
-        <div class="form " method="post" action="#">
-
+        <div class="form" method="post" action="/add">
+<!--
             <div class="row gx-3 ">
 
                 <div class="form-group m-sm-auto  col-md-6 p-2">    
@@ -33,24 +34,19 @@
                     </select>
                 </div>
             </div>
-            
+-->    
             <div class="row gx-3">
                 <div class="form-group col-xs-auto col-md-6 p-2">
-                    <select class="form-select form-select-sm col-6" aria-label="Default select example">
+                    <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articolo" name="articolo">
                         <option selected>Articolo</option>
-
-                        <%- // variabili d pescare db %>
-                            <option value="" name="sottocategoria" id="sottocategoria">sottocategoria</option>
-                         
-                        
                     </select>
                 </div>
 
                 <div class="form-group col-xs-auto col-md-6 p-2 ">
                     <div class="input-group ">
-                        <input class="form-control input-sm" style="width:60%; height: 31px;" type="number" id='quantitaArticolo' name="quantitaArticolo" value="#" placeholder="Quantità" min="0">
+                        <input class="form-control input-sm" style="width:60%; height: 31px;" type="number" id='quantitaArticolo' name="quantitaArticolo" value="" placeholder="Quantità" min="0">
 
-                        <input class="form-control input-sm" style="width:40%; height: 31px;" type="text" id='unitaArticolo' name="unitaArticolo" value="#" placeholder="Unità" disabled >                                             
+                        <input class="form-control input-sm" style="width:40%; height: 31px;" type="text" id='unitaArticolo' name="unitaArticolo" disabled >                                             
                     </div>
                 </div>
             </div>
@@ -103,152 +99,91 @@
         </button>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-secondary table-striped-columns accordion accordion-flush w-auto m-auto ">
-            <thead>
-                <tr>
-                <th scope="col">Info articolo</th>
-                <th scope="col">Nome articolo</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Sottocategoria</th>
-                <th scope="col">Quantità</th>
-                <th scope="col">unità di misura</th>
-                <th scope="col">scadenza</th>
-                <th scope="col">Opzioni</th>               
-                </tr>
-            </thead>
-            <tbody>
-               <div class="accordion-item">     
-                    <tr class="accordion-header">
-                        <th scope="col">
-                            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#riga1" aria-expanded="false" >
-                                Info
-                            </button>
-                        </th>
-                        <th scope="col">prova</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">
-                            <div class="btn-group dropup"  >
-                                <button type="button" class="btn btn-secondary" onclick="test();">Invia</button>
-                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" aria-haspopup="true" >
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="test();">Modifica</a></li>
-                                    <li><a class="dropdown-item" onclick="test();">Elimina</a></li>     
-                                </ul>
+    <% if (articoliMagazzino) { %>
+            <div class="table-responsive">
+                <table class="table table-secondary table-striped-columns accordion accordion-flush w-auto m-auto ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Info articolo</th>
+                            <th scope="col">Nome articolo</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Sottocategoria</th>
+                            <th scope="col">Quantità</th>
+                            <th scope="col">unità di misura</th>
+                            <th scope="col">scadenza</th>
+                            <th scope="col">Opzioni</th>               
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% articoliMagazzino.forEach(element => { %>
+                            <div class="accordion-item">     
+                                <tr class="accordion-header">
+                                    <th scope="col">
+                                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#riga<%= element.id_magazzino %>" aria-expanded="false" >
+                                            Info
+                                        </button>
+                                    </th>
+                                    <th scope="col"><%= element.nome_articolo %></th>
+                                    <th scope="col"><%= element.categoria %></th>
+                                    <th scope="col"><%= element.sottocategoria %></th>
+                                    <th scope="col"><%= element.quantita_movimento %></th>
+                                    <th scope="col"><%= element.unita_misura %></th>
+                                    <th scope="col"><%= element.data_scadenza.toLocaleDateString('it-IT', dataOptions) %></th>
+                                    <th scope="col">
+                                        <div class="btn-group dropup z-3 position-static" >
+                                            <button type="button" class="btn btn-secondary " onclick="test();">Invia</button>
+                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split " data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" aria-haspopup="true" >
+                                                <span class="visually-hidden ">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu ">
+                                                <li><a class="dropdown-item" onclick="test();">Modifica</a></li>
+                                                <li><a class="dropdown-item" onclick="test();">Elimina</a></li>     
+                                            </ul>
+                                        </div>
+                                    </th>
+                                </tr>
+                                    
+                                <tr class="collapse accordion-collapse" id="riga<%= element.id_magazzino %>" data-bs-parent=".table">
+                                    <td colspan="8"> 
+                                        <div class="container  accordion-body text-center">
+                                            <div class="row pb-2 ">
+                                                <div class="col border border-dark">
+                                                    Data movimento
+                                                </div>
+                                                <div class="col border border-dark">
+                                                    Lotto
+                                                </div>
+                                                <div class="col border border-dark">
+                                                    Prezzo
+                                                </div>
+                                                <div class="col border border-dark">
+                                                    Fornitore
+                                                </div>
+                                            </div>       
+                                            <div class="row">
+                                                <div class="col border border-dark">
+                                                    <%= element.data_movimento.toLocaleDateString('it-IT', dataOptionsTime) %>
+                                                </div>
+                                                <div class="col border border-dark">
+                                                    <%= element.codice_lotto_articolo%>
+                                                </div>
+                                                <div class="col border border-dark">
+                                                    <%= element.prezzo_articolo%>
+                                                </div>
+                                                <div class="col border border-dark">
+                                                    <%= element.ragione_sociale%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                             </div>
-                        </th>
-                    </tr>
-                        
-                    <tr class="collapse accordion-collapse" id="riga1" data-bs-parent=".table">
-                        <td colspan="8"> 
-                            <div class="container  accordion-body text-center">
-                                <div class="row pb-2 ">
-                                    <div class="col border border-dark">
-                                        Data movimento
-                                    </div>
-                                    <div class="col border border-dark">
-                                        Lotto
-                                    </div>
-                                    <div class="col border border-dark">
-                                        Prezzo
-                                    </div>
-                                    <div class="col border border-dark">
-                                        Fornitore
-                                    </div>
-                                </div>       
-                                <div class="row">
-                                    <div class="col border border-dark">
-                                        12/20/2023
-                                    </div>
-                                    <div class="col border border-dark">
-                                        2594786314
-                                    </div>
-                                    <div class="col border border-dark">
-                                        133.21
-                                    </div>
-                                    <div class="col border border-dark">
-                                        merce prova
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-               </div>
-
-               <div class="accordion-item">     
-                    <tr class="accordion-header">
-                        <th scope="col">
-                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#riga2" aria-expanded="false" >
-                            Info
-                        </button>
-                        </th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">Test2</th>
-                        <th scope="col">
-                            <div class="btn-group dropup">
-                                <button type="button" class="btn btn-secondary" onclick="test();">Invia</button>
-                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" >
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="test();">Modifica</a></li>
-                                    <li><a class="dropdown-item" onclick="test();">Elimina</a></li>     
-                                </ul>
-                            </div>
-                        </th>
-                    </tr>
-                    
-                    <tr class="collapse accordion-collapse" id="riga2" data-bs-parent=".table">
-                        <td colspan="8"> 
-                            <div class="container  accordion-body text-center">
-                                <div class="row pb-2 ">
-                                    <div class="col border border-dark">
-                                        Data movimento
-                                    </div>
-                                    <div class="col border border-dark">
-                                        Lotto
-                                    </div>
-                                    <div class="col border border-dark">
-                                        Prezzo
-                                    </div>
-                                    <div class="col border border-dark">
-                                        Fornitore
-                                    </div>
-                                </div>       
-                                <div class="row">
-                                    <div class="col border border-dark">
-                                        12/20/2023
-                                    </div>
-                                    <div class="col border border-dark">
-                                        2594786314
-                                    </div>
-                                    <div class="col border border-dark">
-                                        133.21
-                                    </div>
-                                    <div class="col border border-dark">
-                                        merce prova
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </div>
-
-
-
-            </tbody>
-        </table>
-    </div>
+                        <% }) %> 
+                    </tbody>
+                </table>
+            </div>
+          
+    <% } %>
 
 </div>
 

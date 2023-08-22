@@ -108,11 +108,11 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editModalLabel"></h1>
+                        <h1 class="modal-title fs-5" id="editModalLabel">Modifica articolo</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" id="formUpdate" action="/listaArticoli/update">
+                        <form method="post" id="formUpdate" >
 
                             <div class="row gx-3">
                 
@@ -145,7 +145,6 @@
                                     <div class="input-group ">
                                         <input class="form-control input-sm" style="width:60%" type="number" id='articoloUpdateCapacita' name="articoloUpdateCapacita" placeholder="capacità">
                                         <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example" id="articoloUpdateUnita" name="articoloUpdateUnita">
-                                            <option value="" selected>Unita misura</option>
                                         </select>                            
                                     </div>
                                 </div>
@@ -153,18 +152,6 @@
                                 <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
                             </div>  
                         </form>
-
-                       <!-- <form class="form-group" id="formUpdate" method="post">
-                        <div class="pb-3 col-5 m-auto">
-                            <input type="text" name="contenuto" class="form-control" id="recipient-name">
-                            <select id="categoriaModSotto" name="categoriaModSotto" class="form-select form-select-sm d-none" aria-label="categoriaModSotto" >
-            
-                            </select>
-                        </div>
-                        
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
-                        <button type="submit" class="btn btn-primary">Modifica</button>
-                        </form>-->
                     </div>        
                 </div>
             </div>

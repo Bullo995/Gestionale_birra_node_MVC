@@ -3,8 +3,9 @@ const router = express.Router();
 const Controller = require("../controller/magazionoArticoliControllers");
 
 router
-  .get('/',Controller.getAll);
-  /*.post("/add",Controller)
+  .get('/',Controller.getAll)
+  .post("/add",Controller.creaArticoloMagazzino);
+  /*
   .get("/edit/:id",Controller)
   .put("/update/:id",Controller)
   .delete("/delete/:id",Controller);*/   
