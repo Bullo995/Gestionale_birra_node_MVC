@@ -1,9 +1,9 @@
-const MagazzinoArticoli = require("../models/magazionoArticoli");
+const MagazzinoArticoli = require("../models/magazzinoArticoli");
 
 exports.getAll = async (req, res, next) => {
   try {
     const [dati] = await MagazzinoArticoli.trovaTutti();
-    res.render("magazinoArticoli", { articoliMagazzino: dati });
+    res.render("magazzinoArticoli", { articoliMagazzino: dati });
   } catch (error) {
     next(error);
   }

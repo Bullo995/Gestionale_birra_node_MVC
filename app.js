@@ -7,7 +7,7 @@ const anagraficaCFroute = require('./routes/anagraficaCFroutes');
 const listaArticoliRoute = require('./routes/listaArticoliRoutes');
 const listaProdottiRoute = require('./routes/listaProdottiRoutes');
 const lottiProduzioneRoute = require('./routes/lottiProduzioneRoutes');
-const magazionoArticoliRoute = require('./routes/magazionoArticoliRoutes');
+const magazzinoArticoliRoute = require('./routes/magazzinoArticoliRoutes');
 
 const port = 3000;
 
@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use('/', express.static(path.join(__dirname, '/public')));
 
-app.use('/', magazionoArticoliRoute);
+app.use('/', magazzinoArticoliRoute);
 app.use('/listaArticoli', listaArticoliRoute);
 app.use('/anagraficaClientiFornitori', anagraficaCFroute); 
 app.use('/gestioneRisorse', gestioneRisorseRoute);

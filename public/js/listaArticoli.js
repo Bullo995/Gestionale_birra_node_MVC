@@ -1,4 +1,5 @@
-const host = window.location.host;
+import {categorie,sottocategoria,unitaM} from "./tool.js";
+
 const pagePath = window.location.href;
 
 const editModal = document.getElementById('editModal');
@@ -7,58 +8,12 @@ const deleteModal = document.getElementById('deleteModal');
 
 
 document.addEventListener("DOMContentLoaded",()=>{
-    selectElement = Array.from(document.querySelectorAll('select'));
+    let selectElement = Array.from(document.querySelectorAll('select'));
     selectElement.forEach((element)=>{
         element.value = "";
     })
     document.getElementById("articoloAddSottoCat").disabled = true;
 })
-
-
-async function categorie(){
-    try {
-        const response = await fetch(`http://${host}/gestioneRisorse/CategoriaAll`);
-        if (!response.ok) {
-            throw new Error('Errore nella richiesta.');
-        }
-        const response_json = await response.json();
-        dati = response_json.dati;
-        return dati;
-    } catch (error) {
-        console.error('Si è verificato un errore:', error);
-        throw error;
-    }
-}
-
-async function sottocategoria(id){
-    try{
-        const response = await fetch (`http://${host}/gestioneRisorse/sottocatByCat/${id}`);
-        if(!response.ok){
-            throw new Error('Errore nella richiesta.');
-        }
-        const response_json = await response.json();
-        dati = response_json.dati;
-        return dati; 
-    }catch (error) {
-        console.error('Si è verificato un errore:', error);
-        throw error;
-    }
-}
-
-async function unitaM(){
-    try{
-        const response = await fetch (`http://${host}/gestioneRisorse/UnitaAll`);
-        if(!response.ok){
-            throw new Error('Errore nella richiesta.');
-        }
-        const response_json = await response.json();
-        dati = response_json.dati;
-        return dati; 
-    }catch (error) {
-        console.error('Si è verificato un errore:', error);
-        throw error;
-    }
-}
 
 document.getElementById('formInvio')
 .addEventListener('show.bs.collapse', () => {
@@ -198,7 +153,6 @@ if (editModal) {
 
     document.getElementById("formUpdate")
     .action =  `${pagePath}/update/${idArticolo}`;
-    
     
     })
 }

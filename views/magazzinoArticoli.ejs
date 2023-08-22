@@ -7,46 +7,37 @@
 
     <h1 class="display-3 text-center "> Magazzino articoli</h1>
 
-    <div class="collapse" id="formInvio">
-        <div class="form" method="post" action="/add">
-<!--
+    <div class="collapse" id="invioCollapse">
+
+        <div class="form" method="post" action="/add" >
+
             <div class="row gx-3 ">
 
                 <div class="form-group m-sm-auto  col-md-6 p-2">    
-                    <select class="form-select form-select-sm " aria-label="Default select example">
+                    <select class="form-select form-select-sm " id="categoriaAdd" name="categoriaAdd">
                         <option selected>Categoria</option>
-
-                            <%- // variabili d pescare db %>
-                            <option value="" name="categoria" id="">categoria</option>
-                          
-                        
                     </select>
                 </div>
 
                 <div class="form-group m-sm-auto col-md-6 p-2 ">  
-                    <select class="form-select form-select-sm col-6" aria-label="Default select example">
-                        <option selected>Sottocategoria</option>
-
-                            <%- // variabili d pescare db %>
-                            <option value="" name="sottocategoria" id="sottocategoria">sottocategoria</option>
-                            
-                        
+                    <select class="form-select form-select-sm col-6" id="sottocategoriaAdd" name="sottocategoriaAdd">
+                        <option selected>Sottocategoria</option>   
                     </select>
                 </div>
             </div>
--->    
+
             <div class="row gx-3">
                 <div class="form-group col-xs-auto col-md-6 p-2">
-                    <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articolo" name="articolo">
+                    <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloAdd" name="articoloAdd">
                         <option selected>Articolo</option>
                     </select>
                 </div>
 
                 <div class="form-group col-xs-auto col-md-6 p-2 ">
                     <div class="input-group ">
-                        <input class="form-control input-sm" style="width:60%; height: 31px;" type="number" id='quantitaArticolo' name="quantitaArticolo" value="" placeholder="Quantità" min="0">
+                        <input class="form-control input-sm" style="width:60%; height: 31px;" type="number" id='quantitaArticoloAdd' name="quantitaArticoloAdd" value="" placeholder="Quantità" min="0">
 
-                        <input class="form-control input-sm" style="width:40%; height: 31px;" type="text" id='unitaArticolo' name="unitaArticolo" disabled >                                             
+                        <input class="form-control input-sm" style="width:40%; height: 31px;" type="text" id='unitaArticoloAdd' name="unitaArticoloAdd" disabled >                                             
                     </div>
                 </div>
             </div>
@@ -54,12 +45,12 @@
             <div class="row gx-3">
                 
                 <div class="form-group  col-xs-auto col-md-6 p-2 ">
-                    <input class="form-control input-sm" style=" height: 31px;" type="text" id='lottoArticolo' name="lottoArticolo" placeholder="Lotto" >
+                    <input class="form-control input-sm" style=" height: 31px;" type="text" id='lottoArticoloAdd' name="lottoArticoloAdd" placeholder="Lotto" >
                 </div>
 
                 <div class="form-group col-xs-auto col-md-6 p-2 ">
                     <div class="input-group">
-                        <input class="form-control input-sm" style=" height: 31px;" type="text" id='prezzoArticolo' name="prezzoArticolo" placeholder="Prezzo" >
+                        <input class="form-control input-sm" style=" height: 31px;" type="text" id='prezzoArticoloAdd' name="prezzoArticoloAdd" placeholder="Prezzo" >
                         <span class="input-group-text" style="height: 31px;">$</span>
                     </div>
                 </div>
@@ -70,31 +61,38 @@
                 
                 <label class="col-2 col-form-label pb-sm-2" for="dataMovimentoArticolo" >Data movimento</label>
                 <div class="col-4">
-                    <input type="date" class="form-control" style=" height: 31px;"  id="dataMovimentoArticolo" name="dataMovimentoArticolo" >  
+                    <input type="date" class="form-control" style=" height: 31px;"  id="dataMovimentoArticoloAdd" name="dataMovimentoArticoloAdd" >  
                 </div>
-            
-
             
                 <label class="col-2 col-form-label pb-sm-2" for="dataScadenzaArticolo" >Data scadenza</label>          
                 <div class="col-4">
-                    <input type="date" class="form-control  " style=" height: 31px;" id="dataScadenzaArticolo" name="dataScadenzaArticolo" >                          
+                    <input type="date" class="form-control  " style=" height: 31px;" id="dataScadenzaArticoloAdd" name="dataScadenzaArticoloAdd" >                          
                 </div>
                 
             </div>  
 
-            <div class="row gx-3 col-3 p-3 m-auto">
-                
-                    <button class="btn btn-secondary btn-md " type="submit" value="submit">
+            <div class="row gx-3 pt-3">
+                <div class="form-group m-sm-auto col-md-6 p-2 m-auto">  
+                    <select class="form-select form-select-sm col-xs-auto col-md-6 p-2"  id="fornitoreArticoloAdd" name="fornitoreArticoloAdd">
+                        <option value="" selected>Fornitore</option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <button class="btn btn-secondary btn-md col-xs-auto col-md-3 m-auto" type="submit" value="submit">
                         Inserisci dati
                     </button>
-                
-            </div>  
+                </div>
+               
+            </div>
+
+            
 
         </div>
     </div>
                             
     <div class="row col-md-4 p-4 m-auto">
-        <button class="btn btn-outline-secondary btn-sm " type="button" data-bs-toggle="collapse" data-bs-target="#formInvio" aria-expanded="false" aria-controls="formInvio">
+        <button class="btn btn-outline-secondary btn-sm " type="button" data-bs-toggle="collapse" data-bs-target="#invioCollapse" aria-expanded="false" aria-controls="formInvio">
             Form invio dati
         </button>
     </div>
@@ -187,7 +185,7 @@
 
 </div>
 
-
-
+<script type="module" src="/js/tool.js"></script>
+<script type="module" src="/js/magazzinoArticoli.js"></script>
 
 <%- include('template/footer') %>
