@@ -50,6 +50,14 @@ class Articolo {
         return db.execute(sql, [id]);
     }
 
+    static trovaBySottocat(idSottocat){
+        let sql =`
+        SELECT * FROM anagrafiche_articoli
+        WHERE id_sottocategoria = ?;
+        `
+        return db.execute(sql, [idSottocat]);
+    }
+
     static update(id,idSottocategoria, nomeArticolo, descrizione_articolo, capacita, idUnitaM){
 
     let sql =`

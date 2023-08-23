@@ -55,22 +55,39 @@ exports.getArticoloById = async (req, res, next) => {
     next(error); 
   }
 };
-  exports.aggiornaArticolo = async (req, res, next) =>{
-    try{
-      let articoloId = req.params.id;
-      let sottocategoriaId = req.body.articoloUpdateSottoCat;
-      let articolo = req.body.articoloUpdateNome;
-      let descrizione = req.body.articoloUpdateDescrizione == "" ? null : req.body.articoloUpdateDescrizione;
-      let capacita = req.body.articoloUpdateCapacita == "" ? null : req.body.articoloUpdateCapacita;
-      let unitaId = req.body.articoloUpdateUnita == ""  || req.body.articoloUpdateUnita == undefined ? null : req.body.articoloUpdateUnita;
 
-      await Articoli.update(articoloId,sottocategoriaId,articolo,descrizione,capacita,unitaId);
-      //res.status(200).json({message: "aggiornato con successo" });
-      res.redirect("/listaArticoli");
-    }catch (error) { 
-      next(error);
-    }
-  };
+exports.getArticoloBySottocat = async(req, res, next) =>{
+  try{
+    let sottocatArticolo = req.params.idSottocat;
+
+    let [articoli] = await Articoli.trovaBySottocat(sottocatArticolo);
+    
+    let articoliFiltrati = articoli.map(({id_articolo,nome_articolo, id_unita_misura}) => ({id_articolo,nome_articolo,id_unita_misura}));
+
+    res.status(200).json({ dati: articoliFiltrati });
+  }catch (error) { 
+    next(error);
+  }
+};
+
+
+
+exports.aggiornaArticolo = async (req, res, next) =>{
+  try{
+    let articoloId = req.params.id;
+    let sottocategoriaId = req.body.articoloUpdateSottoCat;
+    let articolo = req.body.articoloUpdateNome;
+    let descrizione = req.body.articoloUpdateDescrizione == "" ? null : req.body.articoloUpdateDescrizione;
+    let capacita = req.body.articoloUpdateCapacita == "" ? null : req.body.articoloUpdateCapacita;
+    let unitaId = req.body.articoloUpdateUnita == ""  || req.body.articoloUpdateUnita == undefined ? null : req.body.articoloUpdateUnita;
+
+    await Articoli.update(articoloId,sottocategoriaId,articolo,descrizione,capacita,unitaId);
+    //res.status(200).json({message: "aggiornato con successo" });
+    res.redirect("/listaArticoli");
+  }catch (error) { 
+    next(error);
+  }
+};
 
 exports.cancellaArticolo = async (req,res,next) =>{
   try{
