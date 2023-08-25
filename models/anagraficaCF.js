@@ -60,6 +60,14 @@ class AnagraficaCF{
         return db.execute(sql,[id]);
     }
 
+    static getListaCF(){
+        let sql = `
+        SELECT cf.id_cliente_fornitore, cf.ragione_sociale
+        FROM clienti_fornitori AS cf;
+        `
+        return db.execute(sql);
+    }
+
     static update(
         idClienteFornitore,
         ragioneSociale, 

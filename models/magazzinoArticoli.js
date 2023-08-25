@@ -4,11 +4,11 @@ class MagazzinoArticoli{
 
     constructor(config){
         this.idArticolo = config.idArticolo;
-        this.dataMovimento = new data(config.dataMovimento);
+        this.dataMovimento = config.dataMovimento;
         this.quantitaMovimento = config.quantitaMovimento;
         this.prezzo = config.prezzo || null ;
         this.codiceLotto = config.codiceLotto || null;
-        this.dataScadenza = new data (config.dataScadenza) || null;
+        this.dataScadenza = config.dataScadenza || null;
         this.idFornitore = config.idFornitore;
     }
 

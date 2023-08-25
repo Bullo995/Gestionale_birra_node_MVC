@@ -20,7 +20,6 @@ exports.creaNuovoCF = async (req, res, next) => {
     let numeroTelefono = req.body.numeroTelefonoAdd ;
     let email = req.body.emailAdd;
     let clienteFornitore = req.body.addCF;
-    console.log(clienteFornitore);
     if(ragioneSociale !== ""){
       let anagraficaCF = new AnagraficaCF({
         ragioneSociale : ragioneSociale,
@@ -102,3 +101,13 @@ exports.cancellaClienteFornitore = async (req, res, next) =>{
     next(error);
   }
 };
+
+exports.getlista = async (req, res, next) =>{
+  try{
+    [listaCF] = await AnagraficaCF.getListaCF();
+    res.status(200).json({ dati: listaCF });
+
+  }catch (error) {
+    next(error);
+  }
+}

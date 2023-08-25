@@ -73,3 +73,18 @@ export async function unitaByid(id){
         throw error;
     }
 }
+
+export async function listaCF(){
+    try{
+        const response = await fetch (`http://${host}/anagraficaClientiFornitori/lista`);
+        if(!response.ok){
+            throw new Error('Errore nella richiesta.');
+        }
+        const response_json = await response.json();
+        const dati = response_json.dati;
+        return dati;
+    }catch (error) {
+        console.error('Si è verificato un errore:', error);
+        throw error;
+    }
+}

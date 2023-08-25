@@ -9,7 +9,7 @@
 
     <div class="collapse" id="invioCollapse">
 
-        <div class="form" method="post" action="/add" >
+        <form method="post" action="/add" >
 
             <div class="row gx-3 ">
 
@@ -88,7 +88,7 @@
 
             
 
-        </div>
+        </Form>
     </div>
                             
     <div class="row col-md-4 p-4 m-auto">
@@ -127,6 +127,7 @@
                                     <th scope="col"><%= element.quantita_movimento %></th>
                                     <th scope="col"><%= element.unita_misura !== null ? element.unita_misura : "//" %></th>
                                     <th scope="col"><%= element.data_scadenza !== null ? element.data_scadenza.toLocaleDateString('it-IT', dataOptions) : "//" %></th>
+                                    <% console.log(element.data_scadenza) %>
                                     <th scope="col">
                                         <div class="btn-group dropup z-3 position-static" >
                                             <button type="button" class="btn btn-secondary " onclick="test();">Invia</button>

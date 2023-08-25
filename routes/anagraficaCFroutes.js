@@ -4,6 +4,7 @@ const Controller = require("../controller/anagraficaCFControllers");
 
 router
   .get('/',Controller.getAll)
+  .get('/lista',Controller.getlista)
   .post("/add",Controller.creaNuovoCF)
   .get("/delete/:id",Controller.cancellaClienteFornitore)
   .get("/edit/:id",Controller.getCFById)

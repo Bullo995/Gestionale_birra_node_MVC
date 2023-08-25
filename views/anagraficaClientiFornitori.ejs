@@ -123,9 +123,6 @@
                             <td><%= element.email %></td>
                             <td><%= element.c_f%></td>
                             
-                            <!--<td class="text-center"style="width: 30px;">
-                                <a href="/anagraficaClientiFornitori/delete/<%= //element.id_cliente_fornitore %>"><i class="fas fa-trash"></i></a>
-                            </td>-->
                             <td class="text-center"style="width: 30px;">
                                 <a data-bs-toggle="modal" 
                                     data-bs-target="#deleteModal" 
@@ -142,9 +139,7 @@
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                             </td>
-                            <!--<td class="text-center"style="width: 30px;">
-                                <a href="#"><i class="fas fa-pencil-alt"></i></a>
-                            </td>-->
+                            
                         </tr>
                     <% }) %>
                 <% } %>
@@ -241,46 +236,7 @@
                         </div>
                         
                     </form>
-                  <!--  <form method="post" id="formUpdate" >
-
-                        <div class="row gx-3">
-            
-                            <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
-                                <select class="form-select form-select-sm " aria-label="Default select example" id="articoloUpdateCat" name="articoloUpdateCat">
-                                    <option value="" class="d-none" selected>Categoria</option>
-                                </select>
-                            </div>
-            
-                            <div class="form-group m-sm-auto col-md-6 px-2 my-2">  
-                                <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloUpdateSottoCat" name="articoloUpdateSottoCat">
-                                    <option value="" class="d-none" selected>Sottocategoria</option>  
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="row gx-3">
-                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                                <input class="form-control input-sm" type="text" id="articoloUpdateNome" name="articoloUpdateNome" placeholder="Nome articolo">
-                            </div>
-            
-                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                                <input class="form-control input-sm" type="text" id="articoloUpdateDescrizione" name="articoloUpdateDescrizione" placeholder="Descrizione">
-                            </div>
-                        </div>
-                        
-                        <div class="row gx-3 p-0">
-                            
-                            <div class="form-group col-md-6 px-2 my-2">
-                                <div class="input-group ">
-                                    <input class="form-control input-sm" style="width:60%" type="number" id='articoloUpdateCapacita' name="articoloUpdateCapacita" placeholder="capacità">
-                                    <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example" id="articoloUpdateUnita" name="articoloUpdateUnita">
-                                    </select>                            
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-secondary btn-md col-md-3 m-auto" data-bs-dismiss="modal">Anulla</button>
-                            <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
-                        </div>  
-                    </form>-->
+                  
                 </div>        
             </div>
         </div>

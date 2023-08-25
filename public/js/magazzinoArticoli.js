@@ -1,10 +1,12 @@
-import { categorie, sottocategoria,listaArticoli, unitaM, unitaByid } from "./tool.js";
-let caricato = false;
+import { categorie, sottocategoria,listaArticoli, unitaM, unitaByid, listaCF } from "./tool.js";
+
 
 
 
 document.getElementById('invioCollapse')
 .addEventListener('show.bs.collapse', () => {
+
+    
     
     const catArticoloSel = document.getElementById("categoriaAdd");
     const sottocatArticoloSel = document.getElementById("sottocategoriaAdd");
@@ -12,11 +14,14 @@ document.getElementById('invioCollapse')
     const unitaArticolo = document.getElementById("unitaArticoloAdd");
     const fornitoreArticoloSel = document.getElementById("fornitoreArticoloAdd");
 
+    let caricato = false;
     sottocatArticoloSel.disabled = true;
     articoloSel.disabled = true;
     unitaArticolo.value = "";
-
-    // non è completo è pieno di bug 
+    catArticoloSel .innerHTML = `<option class="d-none" value="" selected>Categoria</option>`;
+    sottocatArticoloSel.innerHTML = `<option class="d-none" value="" selected>Sottocategoria</option>`;
+    articoloSel.innerHTML = `<option class="d-none" value="" selected>Articolo</option>`;
+    fornitoreArticoloSel.innerHTML = `<option class="d-none" value="" selected>Fornitore</option>`;
     if(!caricato){
         caricato = true;
         categorie()
@@ -28,12 +33,23 @@ document.getElementById('invioCollapse')
                 catArticoloSel.appendChild(newOption);
             })
         })
-        catArticoloSel.addEventListener(`change`, ()=>{
 
+        listaCF()
+        .then(dati =>{
+            dati.forEach(fornitore =>{
+                const newOption = document.createElement('option');
+                newOption.textContent = fornitore.ragione_sociale;
+                newOption.value = fornitore.id_cliente_fornitore;
+                fornitoreArticoloSel.appendChild(newOption);
+            })
+        })
+
+        catArticoloSel.addEventListener(`change`, ()=>{
             sottocategoria(catArticoloSel.value)
             .then(sottocategorie =>{
                 sottocatArticoloSel.disabled = false;
-                sottocatArticoloSel.innerHTML = "";
+                sottocatArticoloSel.innerHTML = `<option class="d-none" value="" selected>Sottocategoria</option>`;
+
                 sottocategorie.forEach(sottocategoria =>{
                     const newOption = document.createElement('option');
                     newOption.textContent = sottocategoria.sottocategoria;
@@ -47,7 +63,7 @@ document.getElementById('invioCollapse')
             listaArticoli(sottocatArticoloSel.value)
             .then(articoli=>{
 
-                articoloSel.innerHTML = "";
+                articoloSel.innerHTML = `<option class="d-none" value="" selected>Articolo</option>`;
                 articoloSel.disabled = true;
                 unitaArticolo.value = "";
 
@@ -62,17 +78,19 @@ document.getElementById('invioCollapse')
                         newOption.dataset.idUnita = articolo.id_unita_misura;
                         articoloSel.appendChild(newOption);
                     })
-                    let articoloSelezionato = articoloSel.options[articoloSel.selectedIndex];
-                    //da controllare meglio i problemi di caricamento 
-                    if(articoloSelezionato !== undefined && articoloSelezionato !== ""){
-                        unitaByid(articoloSelezionato.dataset.idUnita)
-                        .then(dati=>{
-                        unitaArticolo.value = dati;
-                        })
-                    }
+                    
                 }
             })
-            //inserire caricamento fornitori 
+        })
+
+        articoloSel.addEventListener(`change`, ()=>{
+            let articoloSelezionato = articoloSel.options[articoloSel.selectedIndex];
+            if(!articoloSelezionato.dataset.idUnita ||articoloSelezionato.dataset.idUnita !=="null" ){
+                unitaByid(articoloSelezionato.dataset.idUnita)
+                .then(dati=>{
+                unitaArticolo.value = dati;
+                })
+            }
         })
     }
 })
