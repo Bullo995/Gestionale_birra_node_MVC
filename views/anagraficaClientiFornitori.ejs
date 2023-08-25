@@ -8,18 +8,18 @@
 
     <div class="collapse" id="formInvio">
 
-        <div class="form " method="post" action="#">
+        <form method="post" action="/anagraficaClientiFornitori/add">
                 
             <div class="row gx-3">   
 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="ragione_sociale" class="form-label">Ragione Sociale:</label>
-                    <input type="text" class="form-control" id="ragione_sociale" name="ragione_sociale">
+                    <input type="text" class="form-control" id="ragioneSocialeAdd" name="ragioneSocialeAdd">
                 </div>
 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="partita_iva" class="form-label">Partita IVA:</label>
-                    <input type="text" class="form-control" id="partita_iva" name="partita_iva">
+                    <input type="text" class="form-control" id="partitaIvaAdd" name="partitaIvaAdd">
                 </div>
 
             </div>
@@ -27,12 +27,12 @@
             <div class="row gx-3">
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="indirizzo" class="form-label">Indirizzo:</label>
-                    <input type="text" class="form-control" id="indirizzo" name="indirizzo">
+                    <input type="text" class="form-control" id="indirizzoAdd" name="indirizzoAdd">
                 </div>
 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="citta" class="form-label">Città:</label>
-                    <input type="text" class="form-control" id="citta" name="citta">
+                    <input type="text" class="form-control" id="cittaAdd" name="cittaAdd">
                 </div>
 
             </div>
@@ -41,12 +41,12 @@
                 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="sigla_provincia" class="form-label">Provincia:</label>
-                    <input type="text" class="form-control" id="sigla_provincia" name="sigla_provincia">
+                    <input type="text" class="form-control" id="siglaProvinciaAdd" name="siglaProvinciaAdd">
                 </div>
 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="cap" class="form-label">CAP:</label>
-                    <input type="text" class="form-control" id="cap" name="cap">
+                    <input type="text" class="form-control" id="capAdd" name="capAdd">
                 </div>
 
             </div>
@@ -54,22 +54,35 @@
 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="emailAdd" name="emailAdd">
                 </div>
 
                 <div class="form-group  col-xs-auto col-md-6 p-2">
                     <label for="numero_telefono" class="form-label">Numero di Telefono:</label>
-                    <input type="tel" class="form-control" id="numero_telefono" name="numero_telefono">
+                    <input type="tel" class="form-control" id="numeroTelefonoAdd" name="numeroTelefonoAdd">
                 </div>
 
             </div>
             <div class="row gx-3">
-                
+                <div class="col-xs-auto col-md-3 p-2 m-auto">
+                    <div class="form-check " >
+                        <input class="form-check-input" type="radio" name="addCF" id="addCF" value="f">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Fornitore
+                        </label>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="addCF" id="addCF" value="c" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Cliente
+                    </label>
+                    </div>
+                </div>
 
-                <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">inserisci</button>
+                <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" >inserisci</button>
             </div>
             
-        </div>
+        </form>
     </div>
 
     <div class="row col-md-4 p-4 m-auto">
@@ -89,6 +102,7 @@
                     <th>Partita IVA</th>
                     <th>Numero di Telefono</th>
                     <th>Email</th>
+                    <th>C/F</th>
                     <th>Elimina</th>
                     <th>Modifica</th>
 
@@ -96,43 +110,206 @@
             </thead>
 
             <tbody>
-                
-                <tr>
-                    <td>Nome Cliente/Fornitore 1</td>
-                    <td>Via Roma, 1</td>
-                    <td>00100</td>
-                    <td>Roma</td>
-                    <td>RM</td>
-                    <td>12345678901</td>
-                    <td>+39 1234567890</td>
-                    <td>cliente1@example.com</td>
-                    <td class="text-center"style="width: 30px;">
-                        <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                    <td class="text-center"style="width: 30px;">
-                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nome Cliente/Fornitore 2</td>
-                    <td>Via Milano, 10</td>
-                    <td>20100</td>
-                    <td>Milano</td>
-                    <td>MI</td>
-                    <td>98765432109</td>
-                    <td>+39 9876543210</td>
-                    <td>fornitore2@example.com</td>
-                    <td class="text-center"style="width: 30px;">
-                        <a href="#"><i class="fas fa-trash"></i></a>
-                    </td>
-                    <td class="text-center"style="width: 30px;">
-                        <a href="#"><i class="fas fa-pencil-alt"></i></a>
-                    </td>
-                </tr>
-                
+                <% if (anagrafiche) { %>
+                    <% anagrafiche.forEach(element => { %>
+                        <tr>
+                            <td><%= element.ragione_sociale %></td>
+                            <td><%= element.indirizzo %></td>
+                            <td><%= element.cap %></td>
+                            <td><%= element.citta %></td>
+                            <td><%= element.sigla_provincia %></td>
+                            <td><%= element.partita_iva %></td>
+                            <td><%= element.numero_telefono %></td>
+                            <td><%= element.email %></td>
+                            <td><%= element.c_f%></td>
+                            
+                            <!--<td class="text-center"style="width: 30px;">
+                                <a href="/anagraficaClientiFornitori/delete/<%= //element.id_cliente_fornitore %>"><i class="fas fa-trash"></i></a>
+                            </td>-->
+                            <td class="text-center"style="width: 30px;">
+                                <a data-bs-toggle="modal" 
+                                    data-bs-target="#deleteModal" 
+                                    data-bs-whatever="<%= element.id_cliente_fornitore  %>" 
+                                    href="#deleteModal">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                            <td class="text-center"style="width: 30px;">
+                                <a data-bs-toggle="modal" 
+                                    data-bs-target="#editModal" 
+                                    data-bs-whatever="<%= element.id_cliente_fornitore %>" 
+                                    href="#editModal">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                            <!--<td class="text-center"style="width: 30px;">
+                                <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                            </td>-->
+                        </tr>
+                    <% }) %>
+                <% } %>
             </tbody>
         </table>
     
 </div>
 
+<div class="container">
+    
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Modifica cliente fornitore</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <form method="post" id="formUpdate" >
+                
+                        <div class="row gx-3">   
+            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="ragione_sociale" class="form-label">Ragione Sociale:</label>
+                                <input type="text" class="form-control" id="ragioneSocialeAdd" name="ragioneSocialeAdd">
+                            </div>
+            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="partita_iva" class="form-label">Partita IVA:</label>
+                                <input type="text" class="form-control" id="partitaIvaAdd" name="partitaIvaAdd">
+                            </div>
+            
+                        </div>
+            
+                        <div class="row gx-3">
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="indirizzo" class="form-label">Indirizzo:</label>
+                                <input type="text" class="form-control" id="indirizzoAdd" name="indirizzoAdd">
+                            </div>
+            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="citta" class="form-label">Città:</label>
+                                <input type="text" class="form-control" id="cittaAdd" name="cittaAdd">
+                            </div>
+            
+                        </div>
+            
+                        <div class="row gx-3">
+                            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="sigla_provincia" class="form-label">Provincia:</label>
+                                <input type="text" class="form-control" id="siglaProvinciaAdd" name="siglaProvinciaAdd">
+                            </div>
+            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="cap" class="form-label">CAP:</label>
+                                <input type="text" class="form-control" id="capAdd" name="capAdd">
+                            </div>
+            
+                        </div>
+                        <div class="row gx-3">
+            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="emailAdd" name="emailAdd">
+                            </div>
+            
+                            <div class="form-group  col-xs-auto col-md-6 p-2">
+                                <label for="numero_telefono" class="form-label">Numero di Telefono:</label>
+                                <input type="tel" class="form-control" id="numeroTelefonoAdd" name="numeroTelefonoAdd">
+                            </div>
+            
+                        </div>
+                        <div class="row gx-3">
+                            <div class="col-xs-auto col-md-3 p-2 m-auto">
+                                <div class="form-check " >
+                                    <input class="form-check-input" type="radio" name="addCF" id="addCF" value="f">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Fornitore
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                <input class="form-check-input" type="radio" name="addCF" id="addCF" value="c" >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Cliente
+                                </label>
+                                </div>
+                            </div>
+            
+                            <button type="button" class="btn btn-secondary btn-md col-md-3 m-auto" data-bs-dismiss="modal">Anulla</button>
+                            <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
+                        </div>
+                        
+                    </form>
+                  <!--  <form method="post" id="formUpdate" >
+
+                        <div class="row gx-3">
+            
+                            <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
+                                <select class="form-select form-select-sm " aria-label="Default select example" id="articoloUpdateCat" name="articoloUpdateCat">
+                                    <option value="" class="d-none" selected>Categoria</option>
+                                </select>
+                            </div>
+            
+                            <div class="form-group m-sm-auto col-md-6 px-2 my-2">  
+                                <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloUpdateSottoCat" name="articoloUpdateSottoCat">
+                                    <option value="" class="d-none" selected>Sottocategoria</option>  
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row gx-3">
+                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                <input class="form-control input-sm" type="text" id="articoloUpdateNome" name="articoloUpdateNome" placeholder="Nome articolo">
+                            </div>
+            
+                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                <input class="form-control input-sm" type="text" id="articoloUpdateDescrizione" name="articoloUpdateDescrizione" placeholder="Descrizione">
+                            </div>
+                        </div>
+                        
+                        <div class="row gx-3 p-0">
+                            
+                            <div class="form-group col-md-6 px-2 my-2">
+                                <div class="input-group ">
+                                    <input class="form-control input-sm" style="width:60%" type="number" id='articoloUpdateCapacita' name="articoloUpdateCapacita" placeholder="capacità">
+                                    <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example" id="articoloUpdateUnita" name="articoloUpdateUnita">
+                                    </select>                            
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-md col-md-3 m-auto" data-bs-dismiss="modal">Anulla</button>
+                            <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
+                        </div>  
+                    </form>-->
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+        
+                    <form class="form-group" id="formDelete" method="get">
+            
+                        <h3>Sei sicuro di voler eliminare?</h3>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                        <button type="submit" class="btn btn-primary" >Elimina</button>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+
+</div>
+
+<script src="js/clienteFornitore.js"></script>
 <%- include('template/footer') %>  

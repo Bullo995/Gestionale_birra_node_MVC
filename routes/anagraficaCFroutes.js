@@ -3,10 +3,10 @@ const router = express.Router();
 const Controller = require("../controller/anagraficaCFControllers");
 
 router
-  .get('/',Controller.getAll);
-  /*.post("/add",Controller)
-  .get("/edit/:id",Controller)
-  .put("/update/:id",Controller)
-  .delete("/delete/:id",Controller);  */
+  .get('/',Controller.getAll)
+  .post("/add",Controller.creaNuovoCF)
+  .get("/delete/:id",Controller.cancellaClienteFornitore)
+  .get("/edit/:id",Controller.getCFById);
+  //.put("/update/:id",Controller);  
 
 module.exports = router;

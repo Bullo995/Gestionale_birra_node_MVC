@@ -125,8 +125,8 @@
                                     <th scope="col"><%= element.categoria %></th>
                                     <th scope="col"><%= element.sottocategoria %></th>
                                     <th scope="col"><%= element.quantita_movimento %></th>
-                                    <th scope="col"><%= element.unita_misura %></th>
-                                    <th scope="col"><%= element.data_scadenza.toLocaleDateString('it-IT', dataOptions) %></th>
+                                    <th scope="col"><%= element.unita_misura !== null ? element.unita_misura : "//" %></th>
+                                    <th scope="col"><%= element.data_scadenza !== null ? element.data_scadenza.toLocaleDateString('it-IT', dataOptions) : "//" %></th>
                                     <th scope="col">
                                         <div class="btn-group dropup z-3 position-static" >
                                             <button type="button" class="btn btn-secondary " onclick="test();">Invia</button>
