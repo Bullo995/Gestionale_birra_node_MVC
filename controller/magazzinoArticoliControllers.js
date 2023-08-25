@@ -20,10 +20,6 @@ exports.creaArticoloMagazzino = async (req, res, next) => {
     const dataScadenza = req.body.dataScadenzaArticoloAdd == "" ? null : new Date(req.body.dataScadenzaArticoloAdd);
     const idFornitore = req.body.fornitoreArticoloAdd;
 
-    //dataMovimento = new FormData().append("inputDate",dataMovimento );
-
-    console.log(idArticolo,dataMovimento,quantitaMovimento,prezzo,codiceLotto,dataScadenza,idFornitore);
-
     let articolo = new MagazzinoArticoli({
       idArticolo : idArticolo,
       dataMovimento: dataMovimento,
@@ -38,6 +34,20 @@ exports.creaArticoloMagazzino = async (req, res, next) => {
     res.redirect("/");
 
   } catch (error) {
+    next(error);
+  }
+};
+
+exports.cancellaArticoloMagazzino = async (req,res,next) =>{
+  try{
+    
+    let articoloId = req.params.id;
+
+    await MagazzinoArticoli.delete(articoloId);
+
+    //res.status(200).json({message: "aggiornato con successo" });
+    res.redirect("/");
+  }catch (error) {
     next(error);
   }
 };

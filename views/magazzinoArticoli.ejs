@@ -127,7 +127,6 @@
                                     <th scope="col"><%= element.quantita_movimento %></th>
                                     <th scope="col"><%= element.unita_misura !== null ? element.unita_misura : "//" %></th>
                                     <th scope="col"><%= element.data_scadenza !== null ? element.data_scadenza.toLocaleDateString('it-IT', dataOptions) : "//" %></th>
-                                    <% console.log(element.data_scadenza) %>
                                     <th scope="col">
                                         <div class="btn-group dropup z-3 position-static" >
                                             <button type="button" class="btn btn-secondary " onclick="test();">Invia</button>
@@ -135,8 +134,26 @@
                                                 <span class="visually-hidden ">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu ">
-                                                <li><a class="dropdown-item" onclick="test();">Modifica</a></li>
-                                                <li><a class="dropdown-item" onclick="test();">Elimina</a></li>     
+                                                <li>
+                                                    <a
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editModal"
+                                                        data-bs-whatever="<%= element.id_magazzino %>"
+                                                        href="#editModal"
+                                                        class="dropdown-item" >
+                                                            Modifica
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#deleteModal" 
+                                                        data-bs-whatever="<%= element.id_magazzino %>" 
+                                                        href="#deleteModal"
+                                                        class="dropdown-item" >
+                                                            Elimina
+                                                    </a>
+                                                </li>     
                                             </ul>
                                         </div>
                                     </th>
@@ -184,6 +201,45 @@
           
     <% } %>
 
+</div>
+
+<div class="container">
+    
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Modifica articolo</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+        
+                    <form class="form-group" id="formDelete" method="get">
+            
+                        <h3>Sei sicuro di voler eliminare?</h3>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                        <button type="submit" class="btn btn-primary" >Elimina</button>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="module" src="/js/tool.js"></script>

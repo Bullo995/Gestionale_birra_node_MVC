@@ -46,6 +46,15 @@ class MagazzinoArticoli{
         return db.execute(sql);
     }
 
+    static delete(id){
+
+        let sql =`
+        DELETE FROM magazzino_articoli 
+        WHERE id_articolo_magazzino = ?`;
+    
+        return db.execute(sql, [id]);
+      }
+
 
 }
 

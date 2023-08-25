@@ -60,27 +60,27 @@ class Articolo {
 
     static update(id,idSottocategoria, nomeArticolo, descrizione_articolo, capacita, idUnitaM){
 
-    let sql =`
-    UPDATE anagrafiche_articoli
-    SET
-        id_sottocategoria = ?,
-        nome_articolo = ?,
-        descrizione_articolo = ?,
-        capacita = ?,
-        id_unita_misura = ?
-    WHERE id_articolo = ?
-    `;
+        let sql =`
+        UPDATE anagrafiche_articoli
+        SET
+            id_sottocategoria = ?,
+            nome_articolo = ?,
+            descrizione_articolo = ?,
+            capacita = ?,
+            id_unita_misura = ?
+        WHERE id_articolo = ?
+        `;
 
-    return db.execute(
-        sql, 
-        [  
-            idSottocategoria,
-            nomeArticolo, 
-            descrizione_articolo,
-            capacita,
-            idUnitaM,
-            id
-        ]);
+        return db.execute(
+            sql, 
+            [  
+                idSottocategoria,
+                nomeArticolo, 
+                descrizione_articolo,
+                capacita,
+                idUnitaM,
+                id
+            ]);
     }
 
     static delete(id){

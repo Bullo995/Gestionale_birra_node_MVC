@@ -1,6 +1,8 @@
 import { categorie, sottocategoria,listaArticoli, unitaM, unitaByid, listaCF } from "./tool.js";
 
-
+const pagePath = window.location.href;
+const editModal = document.getElementById('editModal');
+const deleteModal = document.getElementById('deleteModal');
 
 
 document.getElementById('invioCollapse')
@@ -94,3 +96,12 @@ document.getElementById('invioCollapse')
         })
     }
 })
+
+if(deleteModal){
+    deleteModal.addEventListener('show.bs.modal', event => {
+        const idArticolo = event.relatedTarget.getAttribute('data-bs-whatever');
+        console.log(pagePath, idArticolo);
+        document.getElementById("formDelete")     
+        .action = pagePath + `delete/${idArticolo}`;   
+    })  
+  };
