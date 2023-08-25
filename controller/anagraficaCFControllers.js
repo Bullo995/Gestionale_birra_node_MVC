@@ -53,9 +53,41 @@ exports.getCFById = async (req, res, next) => {
   try{
     idCF = req.params.id;
    [fornitore, _] = await AnagraficaCF.trovaById(idCF);
-   
+
    res.status(200).json({ dati: fornitore });
   }catch (error) {
+    next(error);
+  }
+};
+
+exports.aggiornaCF = async (req, res, next) =>{
+  try{
+    let clienteFornitoreId = req.params.id;
+    let ragioneSociale = req.body.ragioneSocialeUpdate;
+    let indrizzo = req.body.indirizzoUpdate;
+    let cap = req.body.capUpdate;
+    let citta = req.body.cittaUpdate;
+    let siglaProvincia = req.body.siglaProvinciaUpdate;
+    let partitaIva = req.body.partitaIvaUpdate;
+    let numeroTel = req.body.numeroTelefonoUpdate;
+    let email = req.body.emailUpdate;
+    let clienteFornitore = req.body.UpdateCF;
+
+    await AnagraficaCF.update(
+      clienteFornitoreId,
+      ragioneSociale,
+      indrizzo,
+      cap,
+      citta,
+      siglaProvincia,
+      partitaIva,
+      numeroTel,
+      email,
+      clienteFornitore
+       );
+    //res.status(200).json({message: "aggiornato con successo" });
+    res.redirect("/anagraficaClientiFornitori");
+  }catch (error) { 
     next(error);
   }
 };

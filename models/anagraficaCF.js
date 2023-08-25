@@ -53,12 +53,57 @@ class AnagraficaCF{
     static trovaById(id){
         
         let sql = `
-        SELECT * FROM lienti_fornitori
+        SELECT * FROM clienti_fornitori
         WHERE id_cliente_fornitore = ?;
         `;
 
         return db.execute(sql,[id]);
     }
+
+    static update(
+        idClienteFornitore,
+        ragioneSociale, 
+        indrizzo, 
+        cap, 
+        citta, 
+        siglaProvincia,
+        partitaIva,
+        numeroTel,
+        email,
+        clienteFornitore
+        ){
+
+            let sql = `
+            UPDATE clienti_fornitori
+            SET
+                ragione_sociale = ?,
+                indirizzo = ?,
+                cap = ?,
+                citta = ?,
+                sigla_provincia = ?,
+                partita_iva = ?,
+                numero_telefono = ?,
+                email = ?,
+                c_f = ?
+            WHERE id_cliente_fornitore = ?;
+            `;
+
+            return db.execute(
+                sql,
+                [
+                    ragioneSociale, 
+                    indrizzo, 
+                    cap, 
+                    citta, 
+                    siglaProvincia,
+                    partitaIva,
+                    numeroTel,
+                    email,
+                    clienteFornitore,
+                    idClienteFornitore
+                ]
+            );
+        }
 
     static delete(id){
 

@@ -6,7 +6,7 @@ router
   .get('/',Controller.getAll)
   .post("/add",Controller.creaNuovoCF)
   .get("/delete/:id",Controller.cancellaClienteFornitore)
-  .get("/edit/:id",Controller.getCFById);
-  //.put("/update/:id",Controller);  
+  .get("/edit/:id",Controller.getCFById)
+  .post("/update/:id",Controller.aggiornaCF);  
 
 module.exports = router;
