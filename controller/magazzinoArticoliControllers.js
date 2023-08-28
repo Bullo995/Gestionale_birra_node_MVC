@@ -37,6 +37,41 @@ exports.creaArticoloMagazzino = async (req, res, next) => {
     next(error);
   }
 };
+exports.getArticoloById = async (req, res, next) => {
+
+  let idArticoloMagazzino = req.params.id;
+
+  let [articolo, _] = await MagazzinoArticoli.trovaById(idArticoloMagazzino);
+
+  res.status(200).json({dati : articolo});
+
+};
+
+exports.aggiornaArticoloMagazzino = async (req, res, next) => {
+  
+  let idArticoloMagazzino = req.params.id;
+  let  idArticolo = req.body.articoloUpdate;
+  let dataMovimento = req.body.dataMovimentoArticoloUpdate; 
+  let quantitaMovimento = req.body.quantitaArticoloUpdate; 
+  let prezzoArticolo = req.body.prezzoArticoloUpdate;
+  let lottoArticolo = req.body.lottoArticoloUpdate;
+  let dataScadenza = req.body.dataScadenzaArticoloUpdate;
+  let idFornitoreCliente = req.body.fornitoreArticoloUpdate;
+
+  //controlli da insererire
+  await MagazzinoArticoli.aggiornaArticoloMagazzino(
+    idFornitoreCliente,
+    idArticoloMagazzino,
+    idArticolo,
+    dataMovimento,
+    quantitaMovimento,
+    prezzoArticolo,
+    lottoArticolo,
+    dataScadenza
+    );
+  
+}
+
 
 exports.cancellaArticoloMagazzino = async (req,res,next) =>{
   try{

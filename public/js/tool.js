@@ -61,7 +61,7 @@ export async function listaArticoli(idSottocat){
 
 export async function unitaByid(id){
     try{
-        const response = await fetch (`http://${host}/gestioneRisorse//UnitaEdit/${id}`);
+        const response = await fetch (`http://${host}/gestioneRisorse/UnitaEdit/${id}`);
         if(!response.ok){
             throw new Error('Errore nella richiesta.');
         }
@@ -83,6 +83,22 @@ export async function listaCF(){
         const response_json = await response.json();
         const dati = response_json.dati;
         return dati;
+    }catch (error) {
+        console.error('Si è verificato un errore:', error);
+        throw error;
+    }
+}
+
+export async function articoloById(idArticolo){
+    try{
+        const response = await fetch (`http://${host}/listaArticoli/edit/${idArticolo}`);
+        if(!response.ok){
+            throw new Error('Errore nella richiesta.');
+        }
+        const response_json = await response.json();
+        const dati = response_json.dati;
+        return dati;
+
     }catch (error) {
         console.error('Si è verificato un errore:', error);
         throw error;

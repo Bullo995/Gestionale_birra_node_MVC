@@ -5,10 +5,9 @@ const Controller = require("../controller/magazzinoArticoliControllers");
 router
   .get('/',Controller.getAll)
   .post("/add",Controller.creaArticoloMagazzino)
-  .get("/delete/:id",Controller.cancellaArticoloMagazzino);
-  /*
-  .get("/edit/:id",Controller)
-  .put("/update/:id",Controller)
-  */   
+  .get("/delete/:id",Controller.cancellaArticoloMagazzino)
+  .get("/edit/:id",Controller.getArticoloById)
+  .post("/update/:id",Controller.aggiornaArticoloMagazzino);
+     
 
 module.exports = router;

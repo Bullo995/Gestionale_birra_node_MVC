@@ -1,9 +1,9 @@
-const Categoria = require("../models/listaProdotti");
+const Prodotto = require("../models/listaProdotti");
 
 exports.getAll = async (req, res, next) => {
   try {
-    //const [rows] = await Categoria.trovaTutti();
-    res.render("listaProdotti"/*, { categorie: rows }*/);
+    const [dati] = await Prodotto.trovaTutti();
+    res.render("listaProdotti", { prodotti: dati });
   } catch (error) {
     next(error);
   }

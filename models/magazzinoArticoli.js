@@ -46,6 +46,44 @@ class MagazzinoArticoli{
         return db.execute(sql);
     }
 
+    static trovaById(id) {
+        let sql = 
+        `SELECT * FROM magazzino_articoli 
+         WHERE id_articolo_magazzino = ?;
+         `;
+    
+        return db.execute(sql,[id]); 
+    }
+
+    static update(id,idArticolo, dataMovimento, quantitaMovimento, prezzoArticolo, lottoArticolo, dataScadenza, idFornitoreCliente){
+
+        let sql =`
+        UPDATE magazzino_articoli
+        SET
+            id_articolo = ?,
+            data_movimento = ?,
+            quantita_articolo = ?,
+            prezzo_articolo = ?,
+            codice_lotto_articolo = ?,
+            data_scadenza = ?,
+            id_fornitore = ?,
+        WHERE id_articolo_magazzino = ?
+        `;
+
+        return db.execute(
+            sql, 
+            [  
+                idArticolo,
+                dataMovimento, 
+                quantitaMovimento,
+                prezzoArticolo,
+                lottoArticolo,
+                dataScadenza,
+                idFornitoreCliente,
+                id
+            ]);
+    }
+
     static delete(id){
 
         let sql =`
