@@ -14,11 +14,11 @@ class Prodotto{
 
         let sql = `
             INSERT INTO anagrafiche_prodotti(
-                nome_prodotto = ?,
-                descrizione_prodotto = ?,
-                capacita = ?,
-                id_unita_misura = ?,
-                prezzo_listino = ?
+                nome_prodotto,
+                descrizione_prodotto,
+                capacita,
+                id_unita_misura,
+                prezzo_listino
             )VALUES(?,?,?,?,?);
         `;
         return db.execute(
@@ -43,6 +43,48 @@ class Prodotto{
         return db.execute(sql);
     }
 
+    static delete(id){
+        let sql = `
+        DELETE FROM anagrafiche_prodotti
+        WHERE id_prodotto = ?;
+        `;
+
+        return db.execute(sql, [id]);
+    }
+
+    static trovaById(id){
+        let sql = `
+        SELECT * FROM anagrafiche_prodotti
+        WHERE id_prodotto = ?;
+        `;
+        return db.execute(sql,[id]);
+    }    
+
+    static update(id,Prodotto,descrizione,capacita,idUnitaMisura,prezzo){
+        
+        let sql = `
+        UPDATE anagrafiche_prodotti
+        SET
+            nome_prodotto = ?,
+            descrizione_prodotto = ?,
+            capacita = ?,
+            id_unita_misura = ?,
+            prezzo_listino = ?
+        WHERE id_prodotto = ?;
+        `;
+
+        return db.execute(
+            sql,
+            [
+                Prodotto,
+                descrizione,
+                capacita,
+                idUnitaMisura,
+                prezzo,
+                id
+            ]
+        );
+    }
 
 }
 

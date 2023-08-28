@@ -6,15 +6,15 @@
     <h1 class="display-1 text-center "> Lista prodotti</h1>
 
     <div class="collapse" id="formInvio">
-        <div class="form " method="post" action="listaProdotti.php">
+        <form  method="post" action="/listaProdotti/add">
             
             <div class="row gx-3">
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="text" id="nomeProdottoListaProdotto" name="nomeProdottoListaProdotto" placeholder="Nome prodotto">
+                    <input class="form-control input-sm" type="text" id="nomeAdd" name="nomeAdd" placeholder="Nome prodotto">
                 </div>
 
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="text" id="descrizioneListaProdotto" name="descrizioneListaProdotto" placeholder="Descrizione">
+                    <input class="form-control input-sm" type="text" id="descrizioneAdd" name="descrizioneAdd" placeholder="Descrizione">
                 </div>
             </div>
             
@@ -22,25 +22,19 @@
                 
                 <div class="form-group col-md-6 px-2 my-2">
                     <div class="input-group ">
-                        <input class="form-control input-sm" style="width:60%" type="number" id='capacitaListaArticoli' name="capacitaListaArticoli" placeholder="capacità">
-                        <select class="form-select form-select-sm"  style="width:40%" aria-label="Default select example">
-                            <option selected>Unita misura</option>
-
-                            
-                                <option value="" name="sottocategoria" id="sottocategoria">unita1</option>
-                             
-                    
+                        <input class="form-control input-sm" style="width:60%" type="number" id='capacitaAdd' name="capacitaAdd" placeholder="capacità">
+                        <select class="form-select form-select-sm"  style="width:40%" id="unitaMisuraAdd", name="unitaMisuraAdd">   
                         </select>                            
                     </div>
                 </div>
 
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="number" id="prezzoListaProdotto" name="prezzoListaProdotto" placeholder="Prezzo listino">
+                    <input class="form-control input-sm" type="number" id="prezzoAdd" name="prezzoAdd" placeholder="Prezzo listino">
                 </div>
 
                 <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">inserisci</button>
             </div>  
-        </div>
+        </form>
     </div>
                             
     <div class="row col-md-4 p-4 m-auto">
@@ -71,12 +65,22 @@
                         <td><%= element.unita_misura %></td>
                         <td><%= element.descrizione_prodotto %></td>
                         <td><%= element.prezzo_listino %></td>
-                        
                         <td class="text-center"style="width: 30px;">
-                            <a href="#"><i class="fas fa-trash"></i></a>
+                            <a data-bs-toggle="modal" 
+                                data-bs-target="#deleteModal" 
+                                data-bs-whatever="<%= element.id_prodotto %>" 
+                                href="#deleteModal">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
+                            
                         <td class="text-center"style="width: 30px;">
-                            <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                            <a data-bs-toggle="modal" 
+                                data-bs-target="#editModal" 
+                                data-bs-whatever="<%= element.id_prodotto %>" 
+                                href="#editModal">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
                         </td>
                     </tr>
 
@@ -88,6 +92,75 @@
 
 </div>
 
+<div class="container">
+    
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Modifica prodotto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="formUpdate" >
+                        <div class="row gx-3">
+                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                <input class="form-control input-sm" type="text" id="nomeUpdate" name="nomeUpdate" placeholder="Nome prodotto">
+                            </div>
+            
+                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                <input class="form-control input-sm" type="text" id="descrizioneUpdate" name="descrizioneUpdate" placeholder="Descrizione">
+                            </div>
+                        </div>
+                        
+                        <div class="row gx-3 p-0">
+                            
+                            <div class="form-group col-md-6 px-2 my-2">
+                                <div class="input-group ">
+                                    <input class="form-control input-sm" style="width:60%" type="number" id='capacitaUpdate' name="capacitaUpdate" placeholder="capacità">
+                                    <select class="form-select form-select-sm"  style="width:40%" id="unitaMisuraUpdate", name="unitaMisuraUpdate">   
+                                    </select>                            
+                                </div>
+                            </div>
+            
+                            <div class="form-group col-xs-12 col-md-6 px-2 my-2">
+                                <input class="form-control input-sm" type="number" id="prezzoUpdate" name="prezzoUpdate" placeholder="Prezzo listino">
+                            </div>
+            
+                            <button type="button" class="btn btn-secondary btn-md col-md-3 m-auto" data-bs-dismiss="modal">Anulla</button>
+                            <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
+                        </div>
+                        
+                    </form>
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+        
+                    <form class="form-group" id="formDelete" method="get">
+            
+                        <h3>Sei sicuro di voler eliminare?</h3>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                        <button type="submit" class="btn btn-primary" >Elimina</button>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<script type="module" src="js/tool.js"></script>
+<script type="module" src="js/listaProdotti.js"></script>
 <%- include('template/footer') %>  
    
   
