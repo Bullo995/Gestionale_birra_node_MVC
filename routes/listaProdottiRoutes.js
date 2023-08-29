@@ -4,6 +4,7 @@ const Controller = require("../controller/listaProdottiControllers");
 
 router
   .get('/',Controller.getAll)
+  .get("/all",Controller.prodotti)
   .post("/add",Controller.creaNuovoProdotto)
   .get("/edit/:id",Controller.getProdottoById)
   .post("/update/:id",Controller.aggiornaProdotto)

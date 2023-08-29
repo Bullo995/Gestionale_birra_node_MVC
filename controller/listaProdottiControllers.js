@@ -9,6 +9,15 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
+exports.prodotti = async (req, res, next) =>{
+  try {
+    const [prodotti] = await Prodotto.trovaTutti();
+    res.status(200).json({ dati: prodotti });
+  } catch (error) {
+    next(error);
+  }
+}
+
 exports.creaNuovoProdotto = async (req, res, next) => {
   try {
     let nome = req.body.nomeAdd;

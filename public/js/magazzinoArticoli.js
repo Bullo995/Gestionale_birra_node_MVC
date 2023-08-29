@@ -126,10 +126,10 @@ if(editModal){
                 quantitaArticoloInput.value = articoliMagazzino.quantita_movimento;
                 lottoArticoloInput.value = articoliMagazzino.codice_lotto_articolo != null ?  articoliMagazzino.codice_lotto_articolo : "";
                 prezzoArticoloInput.value = articoliMagazzino.prezzo_articolo != null ? articoliMagazzino.prezzo_articolo : "";
-                // new Date (articoliMagazzino.data_movimentoto).LocaleDateString('it-IT', dataOptions);
-                const dataMovimento = new Date (articoliMagazzino.data_movimento).toLocaleDateString( dataOptions);
-                console.log(dataMovimento);
-                //dataMovimentoInput.valueAsDate = dataMovimento;
+                //problema con il caricamento delle ore 
+                dataMovimentoInput.valueAsDate = new Date(articoliMagazzino.data_movimento);
+                dataScadenzaInput.valueAsDate = new Date(articoliMagazzino.data_scadenza);
+
                 categorie()
                 .then (categorie =>{
                     categorie.forEach(categoria =>{

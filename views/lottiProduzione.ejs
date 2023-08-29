@@ -2,20 +2,22 @@
 <%- include('template/header') %>
 <%- include('template/nav') %>
 
+<% const dataOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }; %>
+
 <div class="container-fluid m-0 p-2 ">
 
     <h1 class="display-1 text-center ">Lotti produzione</h1>
 
     <div class="collapse" id="formInvio">
-        <div class="form " method="post" action="lottiProduzione.php">
+        <form  method="post" action="/lottiProduzione/add">
             
             <div class="row gx-3">
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="text" id="codiceLottoProduzione" name="codiceLottoProduzione" placeholder="Codice lotto">
+                    <input class="form-control input-sm" type="text" id="codiceLottoProduzioneAdd" name="codiceLottoProduzioneAdd" placeholder="Codice lotto">
                 </div>
 
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                    <input class="form-control input-sm" type="date" id="dataProduzione" name="dataProduzione">
+                    <input class="form-control input-sm" type="date" id="dataProduzioneAdd" name="dataProduzioneAdd">
                 </div>
             </div>
             
@@ -25,26 +27,21 @@
                     <div class="input-group ">
                         
                         <div class="form-group m-sm-auto  col-md-6 px-2 my-2">    
-                        <select class="form-select form-select-sm " aria-label="Default select example">
-                        <option selected>Prodotto</option>
+                        <select class="form-select form-select-sm " id="prodottoAdd" name="prodottoAdd">                       
 
-                        
-                            <option value="" name="categoria" id="">prod1</option>
-                         
-                        
                         </select>
                     </div>
-                        <input class="form-control input-sm" type="number" id="quantitaProdotto" name="quantitaProdotto" placeholder="Quantità">                           
+                        <input class="form-control input-sm" type="number" id="quantitaProdottoAdd" name="quantitaProdottoAdd" placeholder="Quantità">                           
                     </div>
                 </div>
 
                 <div class="form-group col-xs-12 col-md-6 px-2 my-2">
-                <input class="form-control input-sm" type="date" id="dataScadenzaProduzione" name="dataScadenzaProduzione">
+                <input class="form-control input-sm" type="date" id="dataScadenzaAdd" name="dataScadenzaAdd">
                 </div>
 
                 <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">inserisci</button>
             </div>  
-        </div>
+        </form>
     </div>
                             
     <div class="row col-md-4 p-4 m-auto">
@@ -61,31 +58,108 @@
                 <th scope="col">Data scadenza</th>
                 
                 
-                <th scope="col" class="text-center">Elimina</th>
-                <th scope="col" class="text-center">Modifica</th>
+                <th scope="col" class="text-center">Opzioni</th>
+                <!--<th scope="col" class="text-center">Modifica</th>-->
             </tr>
         </thead>
         
         <tbody id='listaArticoli' name='listaArticoli'> 
-            <tr>
-                <td>#30302</td>
-                <td>Prodotto bello</td>
-                <td>100</td>
-                <td>12/12/12</td>
-                <td>12/12/12</td>
-                
-                <td class="text-center"style="width: 30px;">
-                    <a href="#"><i class="fas fa-trash"></i></a>
-                </td>
-                <td class="text-center"style="width: 30px;">
-                    <a href="#"><i class="fas fa-pencil-alt"></i></a>
-                </td>
-            </tr>
+            <% if (lottiProduzione) { %>
+                <% lottiProduzione.forEach(element => { %>
+    
+                    <tr>
+                        <td><%=element.codice_lotto %></td>
+                        <td><%=element.nome_prodotto %></td>
+                        <td><%=element.quantita %></td>
+                        <td><%=element.data_produzione.toLocaleDateString('it-IT', dataOptions) %></td>
+                        <td><%=element.data_scadenza.toLocaleDateString('it-IT', dataOptions) %></td>
+                        <td>
+                            <div class="btn-group dropup z-3 position-static" >
+                                <button type="button" class="btn btn-secondary " onclick="test();">Invia</button>
+                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split " data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" aria-haspopup="true" >
+                                    <span class="visually-hidden ">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editModal"
+                                            data-bs-whatever="<%= element.id_lotto_produzione %>"
+                                            href="#editModal"
+                                            class="dropdown-item" >
+                                                Modifica
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteModal" 
+                                            data-bs-whatever="<%= element.id_lotto_produzione %>" 
+                                            href="#deleteModal"
+                                            class="dropdown-item" >
+                                                Elimina
+                                        </a>
+                                    </li>     
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                <% }) %>
+            <% } %>
         </tbody>
     </table>
 
 </div>
 
+<div class="container">
+    
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Modifica Lotto Produzione</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="formUpdate" >
+                        
+            
+                        <button type="button" class="btn btn-secondary btn-md col-md-3 m-auto" data-bs-dismiss="modal">Anulla</button>
+                        <button class="btn btn-secondary btn-md col-md-3 m-auto " type="submit" value="submit">Modifica</button>
+                        
+                        
+                    </form>
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+        
+                    <form class="form-group" id="formDelete" method="get">
+            
+                        <h3>Sei sicuro di voler eliminare?</h3>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                        <button type="submit" class="btn btn-primary" >Elimina</button>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/js/tool.js"></script>
+<script type="module" src="/js/lottiProduzione.js"></script>
 <%- include('template/footer') %>  
    
   

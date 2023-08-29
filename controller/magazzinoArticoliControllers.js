@@ -29,7 +29,7 @@ exports.creaArticoloMagazzino = async (req, res, next) => {
       dataScadenza : dataScadenza,
       idFornitore : idFornitore
     });
-    await articolo.crea();
+   await articolo.crea();
 
     res.redirect("/");
 

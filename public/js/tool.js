@@ -104,3 +104,18 @@ export async function articoloById(idArticolo){
         throw error;
     }
 }
+
+export async function listaProdotti(){
+    try{
+        const response = await fetch (`http://${host}/listaProdotti/all`);
+        if(!response.ok){
+            throw new Error('Errore nella richiesta.');
+        }
+        const response_json = await response.json();
+        const dati = response_json.dati;
+        return dati;
+    }catch (error) {
+        console.error('Si è verificato un errore:', error);
+        throw error;
+    }
+}
