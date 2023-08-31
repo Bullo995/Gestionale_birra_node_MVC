@@ -62,12 +62,12 @@ class MagazzinoArticoli{
         SET
             id_articolo = ?,
             data_movimento = ?,
-            quantita_articolo = ?,
+            quantita_movimento = ?,
             prezzo_articolo = ?,
             codice_lotto_articolo = ?,
             data_scadenza = ?,
-            id_fornitore = ?,
-        WHERE id_articolo_magazzino = ?
+            id_fornitore = ?
+        WHERE id_articolo_magazzino = ?;
         `;
 
         return db.execute(

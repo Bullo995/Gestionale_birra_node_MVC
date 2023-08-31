@@ -178,7 +178,7 @@
                                             </div>       
                                             <div class="row">
                                                 <div class="col border border-dark">
-                                                    <%= element.data_movimento/*.toLocaleDateString('it-IT', dataOptions)*/ %>
+                                                    <%= element.data_movimento.toLocaleDateString('it-IT', dataOptions) %>
                                                 </div>
                                                 <div class="col border border-dark">
                                                     <%= element.codice_lotto_articolo%>
@@ -209,85 +209,85 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editModalLabel">Modifica articolo</h1>
+                    <h1 class="modal-title fs-5" id="editModalLabel">Modifica articolo magazzino</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <form method="post" id="formUpdate" >
+                        <div class="row gx-3 ">
 
-                    <div class="row gx-3 ">
-
-                        <div class="form-group m-sm-auto  col-md-6 p-2">    
-                            <select class="form-select form-select-sm " id="categoriaUpdate" name="categoriaUpdate">
-                                <option value="" selected class="d-none">Categoria</option>
-                            </select>
-                        </div>
-        
-                        <div class="form-group m-sm-auto col-md-6 p-2 ">  
-                            <select class="form-select form-select-sm col-6" id="sottocategoriaUpdate" name="sottocategoriaUpdate">
-                                <option value="" selected class="d-none">Sottocategoria</option>   
-                            </select>
-                        </div>
-                    </div>
-        
-                    <div class="row gx-3">
-                        <div class="form-group col-xs-auto col-md-6 p-2">
-                            <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloUpdate" name="articoloUpdate">
-                                <option value="" selected class="d-none">Articolo</option>
-                            </select>
-                        </div>
-        
-                        <div class="form-group col-xs-auto col-md-6 p-2 ">
-                            <div class="input-group ">
-                                <input class="form-control input-sm" style="width:60%; height: 31px;" type="number" id='quantitaArticoloUpdate' name="quantitaArticoloUpdate" value="" placeholder="Quantità" min="0">
-        
-                                <input class="form-control input-sm" style="width:40%; height: 31px;" type="text" id='unitaArticoloUpdate' name="unitaArticoloUpdate" disabled >                                             
+                            <div class="form-group m-sm-auto  col-md-6 p-2">    
+                                <select class="form-select form-select-sm " id="categoriaUpdate" name="categoriaUpdate">
+                                    <option value="" selected class="d-none">Categoria</option>
+                                </select>
+                            </div>
+            
+                            <div class="form-group m-sm-auto col-md-6 p-2 ">  
+                                <select class="form-select form-select-sm col-6" id="sottocategoriaUpdate" name="sottocategoriaUpdate">
+                                    <option value="" selected class="d-none">Sottocategoria</option>   
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="row gx-3">
-                        
-                        <div class="form-group  col-xs-auto col-md-6 p-2 ">
-                            <input class="form-control input-sm" style=" height: 31px;" type="text" id='lottoArticoloUpdate' name="lottoArticoloUpdate" placeholder="Lotto" >
-                        </div>
-        
-                        <div class="form-group col-xs-auto col-md-6 p-2 ">
-                            <div class="input-group">
-                                <input class="form-control input-sm" style=" height: 31px;" type="text" id='prezzoArticoloUpdate' name="prezzoArticoloUpdate" placeholder="Prezzo" >
-                                <span class="input-group-text" style="height: 31px;">$</span>
+            
+                        <div class="row gx-3">
+                            <div class="form-group col-xs-auto col-md-6 p-2">
+                                <select class="form-select form-select-sm col-6" aria-label="Default select example" id="articoloUpdate" name="articoloUpdate">
+                                    <option value="" selected class="d-none">Articolo</option>
+                                </select>
+                            </div>
+            
+                            <div class="form-group col-xs-auto col-md-6 p-2 ">
+                                <div class="input-group ">
+                                    <input class="form-control input-sm" style="width:60%; height: 31px;" type="number" id='quantitaArticoloUpdate' name="quantitaArticoloUpdate" value="" placeholder="Quantità" min="0">
+            
+                                    <input class="form-control input-sm" style="width:40%; height: 31px;" type="text" id='unitaArticoloUpdate' name="unitaArticoloUpdate" disabled >                                             
+                                </div>
                             </div>
                         </div>
-                       
-                    </div>  
-        
-                    <div class="row gx-3 pt-3">
                         
-                        <label class="col-2 col-form-label pb-sm-2" for="dataMovimentoArticolo" >Data movimento</label>
-                        <div class="col-4">
-                            <input type="date" class="form-control" style=" height: 31px;"  id="dataMovimentoArticoloUpdate" name="dataMovimentoArticoloUpdate" >  
-                        </div>
-                    
-                        <label class="col-2 col-form-label pb-sm-2" for="dataScadenzaArticolo" >Data scadenza</label>          
-                        <div class="col-4">
-                            <input type="date" class="form-control  " style=" height: 31px;" id="dataScadenzaArticoloUpdate" name="dataScadenzaArticoloUpdate" >                          
-                        </div>
+                        <div class="row gx-3">
+                            
+                            <div class="form-group  col-xs-auto col-md-6 p-2 ">
+                                <input class="form-control input-sm" style=" height: 31px;" type="text" id='lottoArticoloUpdate' name="lottoArticoloUpdate" placeholder="Lotto" >
+                            </div>
+            
+                            <div class="form-group col-xs-auto col-md-6 p-2 ">
+                                <div class="input-group">
+                                    <input class="form-control input-sm" style=" height: 31px;" type="text" id='prezzoArticoloUpdate' name="prezzoArticoloUpdate" placeholder="Prezzo" >
+                                    <span class="input-group-text" style="height: 31px;">$</span>
+                                </div>
+                            </div>
                         
-                    </div>  
-        
-                    <div class="row gx-3 pt-3">
-                        <div class="form-group m-sm-auto col-md-6 p-2 m-auto">  
-                            <select class="form-select form-select-sm col-xs-auto col-md-6 p-2"  id="fornitoreArticoloUpdate" name="fornitoreArticoloUpdate">
-                                <option value="" selected>Fornitore</option>
-                            </select>
+                        </div>  
+            
+                        <div class="row gx-3 pt-3">
+                            
+                            <label class="col-2 col-form-label pb-sm-2" for="dataMovimentoArticolo" >Data movimento</label>
+                            <div class="col-4">
+                                <input type="date" class="form-control" style=" height: 31px;"  id="dataMovimentoArticoloUpdate" name="dataMovimentoArticoloUpdate" >  
+                            </div>
+                        
+                            <label class="col-2 col-form-label pb-sm-2" for="dataScadenzaArticolo" >Data scadenza</label>          
+                            <div class="col-4">
+                                <input type="date" class="form-control  " style=" height: 31px;" id="dataScadenzaArticoloUpdate" name="dataScadenzaArticoloUpdate" >                          
+                            </div>
+                            
+                        </div>  
+            
+                        <div class="row gx-3 pt-3">
+                            <div class="form-group m-sm-auto col-md-6 p-2 m-auto">  
+                                <select class="form-select form-select-sm col-xs-auto col-md-6 p-2"  id="fornitoreArticoloUpdate" name="fornitoreArticoloUpdate">
+                                    
+                                </select>
+                            </div>
+            
+                            <div class="col-6">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
+                                <button type="submit" class="btn btn-primary" >Modifica</button>
+                            </div>
+                        
                         </div>
-        
-                        <div class="col-6">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulla</button>
-                            <button type="submit" class="btn btn-primary" >Elimina</button>
-                        </div>
-                       
-                    </div>
-                    
+                    </form>
                 </div>        
             </div>
         </div>

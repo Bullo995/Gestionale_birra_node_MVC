@@ -43,6 +43,39 @@ class LottoProduzione {
         return db.execute(sql);
     }
 
+    static trovaById(id){
+
+        let sql = `
+        SELECT * FROM lotti_produzione
+        WHERE id_lotto_produzione = ?;
+        `;
+        return db.execute(sql,[id]);
+    }
+
+    static update(idLotto, idProdotto, dataProduzione, dataScadenza, codiceLotto, quantita ){
+        let sql = `
+        UPDATE lotti_produzione
+        SET
+            id_prodotto = ?,
+            data_produzione = ?,
+            data_scadenza = ?,
+            codice_lotto = ?,
+            quantita = ?
+        WHERE id_lotto_produzione = ?;
+        `;
+        return db.execute(
+            sql,
+            [
+                idProdotto,
+                dataProduzione,
+                dataScadenza,
+                codiceLotto,
+                quantita,
+                idLotto
+            ]
+            )
+    }
+    
     static delete(id){
 
         let sql = `

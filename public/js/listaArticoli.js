@@ -72,87 +72,82 @@ if(deleteModal){
 
 if (editModal) {
     editModal.addEventListener('show.bs.modal', event => {
-    const catArticolo = document.getElementById("articoloUpdateCat");
-    const sottocatArticolo = document.getElementById("articoloUpdateSottoCat");
-    const nomeArticolo = document.getElementById("articoloUpdateNome");
-    const descrizioneArticolo = document.getElementById("articoloUpdateDescrizione");
-    const capacitaArticolo = document.getElementById("articoloUpdateCapacita");
-    const unitaArticolo = document.getElementById("articoloUpdateUnita");
-    const idArticolo = event.relatedTarget.getAttribute('data-bs-whatever');
-    let caricato = false;
+        const catArticolo = document.getElementById("articoloUpdateCat");
+        const sottocatArticolo = document.getElementById("articoloUpdateSottoCat");
+        const nomeArticolo = document.getElementById("articoloUpdateNome");
+        const descrizioneArticolo = document.getElementById("articoloUpdateDescrizione");
+        const capacitaArticolo = document.getElementById("articoloUpdateCapacita");
+        const unitaArticolo = document.getElementById("articoloUpdateUnita");
+        const idArticolo = event.relatedTarget.getAttribute('data-bs-whatever');
+        let caricato = false;
+            
+        catArticolo.innerText = "";
+        sottocatArticolo.innerText = "";
+        nomeArticolo.innerText = "";
+        descrizioneArticolo.innerText = "";
+        capacitaArticolo.innerText = "";
+        unitaArticolo.innerText = "";
         
-    catArticolo.innerText = "";
-    sottocatArticolo.innerText = "";
-    nomeArticolo.innerText = "";
-    descrizioneArticolo.innerText = "";
-    capacitaArticolo.innerText = "";
-    unitaArticolo.innerText = "";
-    
-    fetch (`${pagePath}/edit/${idArticolo}`)
-    .then(response => response.json())
-    .then(data =>{
-        const [articolo] = data.dati;
+        fetch (`${pagePath}/edit/${idArticolo}`)
+        .then(response => response.json())
+        .then(data =>{
+            const [articolo] = data.dati;
 
-        if(!caricato){
-            caricato = true; 
-            categorie()
-            .then (categorie =>{
-                categorie.forEach(categoria =>{
+            if(!caricato){
+                caricato = true; 
+                categorie()
+                .then (categorie =>{
+                    categorie.forEach(categoria =>{
+                        const newOption = document.createElement('option');
+                        newOption.textContent = categoria.categoria;
+                        newOption.value = categoria.id_categoria;
+                        catArticolo.appendChild(newOption);
+                    })
+                    catArticolo.value = articolo.id_categoria;
+                })
+                sottocategoria(articolo.id_categoria)
+                .then(sottocategorie =>{
+                    sottocategorie.forEach(sottocategoria =>{
+                        const newOption = document.createElement('option');
+                        newOption.textContent = sottocategoria.sottocategoria;
+                        newOption.value = sottocategoria.id_sottocategoria;
+                        sottocatArticolo.appendChild(newOption);
+                    })
+                    sottocatArticolo.value = articolo.id_sottocategoria;
+                })
+                unitaM()
+                .then(unita=>{
+                    unitaArticolo.innerHTML = `<option class="d-none" value="" selected>Unita misura</option>`;
+                    unita.forEach(unita=>{
                     const newOption = document.createElement('option');
-                    newOption.textContent = categoria.categoria;
-                    newOption.value = categoria.id_categoria;
-                    catArticolo.appendChild(newOption);
-                })
-                catArticolo.value = articolo.id_categoria;
-            })
-            sottocategoria(articolo.id_categoria)
-            .then(sottocategorie =>{
-                sottocategorie.forEach(sottocategoria =>{
-                    const newOption = document.createElement('option');
-                    newOption.textContent = sottocategoria.sottocategoria;
-                    newOption.value = sottocategoria.id_sottocategoria;
-                    sottocatArticolo.appendChild(newOption);
-                })
-                sottocatArticolo.value = articolo.id_sottocategoria;
-            })
-            unitaM()
-            .then(unita=>{
-                unitaOpt = document.createElement('option');
-                unitaOpt.textContent = "Unita misura";
-                unitaOpt.value = "";
-                unitaArticolo.appendChild(unitaOpt);
-                unita.forEach(unita=>{
-                const newOption = document.createElement('option');
-                newOption.textContent = unita.unita_misura;
-                newOption.value = unita.id_unita_misura;
-                unitaArticolo.appendChild(newOption);
-                })
+                    newOption.textContent = unita.unita_misura;
+                    newOption.value = unita.id_unita_misura;
+                    unitaArticolo.appendChild(newOption);
+                    })
 
-                unitaArticolo.value = articolo.id_unita_misura;
-            })
-            nomeArticolo.value = articolo.nome_articolo;
-            descrizioneArticolo.value = articolo.descrizioneArticolo == null ? "" : articolo.descrizioneArticolo;
-            capacitaArticolo.value = articolo.capacita == null ? "" : articolo.capacita;
-        }
-        catArticolo.addEventListener(`change`, ()=>{
-            caricato = false;
-            sottocatArticolo.innerHTML = '';
-
-            sottocategoria(catArticolo.value)
-            .then(sottocategorie =>{
-                sottocategorie.forEach(sottocategoria =>{
-                    const newOption = document.createElement('option');
-                    newOption.textContent = sottocategoria.sottocategoria;
-                    newOption.value = sottocategoria.id_sottocategoria;
-                    sottocatArticolo.appendChild(newOption);
+                    unitaArticolo.value = articolo.id_unita_misura;
                 })
-                sottocatArticolo.value = articolo.id_sottocategoria;
+                nomeArticolo.value = articolo.nome_articolo;
+                descrizioneArticolo.value = articolo.descrizioneArticolo == null ? "" : articolo.descrizioneArticolo;
+                capacitaArticolo.value = articolo.capacita == null ? "" : articolo.capacita;
+            }
+            catArticolo.addEventListener(`change`, ()=>{
+                sottocatArticolo.innerHTML = '<option class="d-none" value="" selected>Sottocategoria</option>';
+
+                sottocategoria(catArticolo.value)
+                .then(sottocategorie =>{
+                    sottocategorie.forEach(sottocategoria =>{
+                        const newOption = document.createElement('option');
+                        newOption.textContent = sottocategoria.sottocategoria;
+                        newOption.value = sottocategoria.id_sottocategoria;
+                        sottocatArticolo.appendChild(newOption);
+                    })
+                })
             })
         })
-    })
 
-    document.getElementById("formUpdate")
-    .action =  `${pagePath}/update/${idArticolo}`;
+        document.getElementById("formUpdate")
+        .action =  `${pagePath}/update/${idArticolo}`;
     
     })
 }

@@ -99,7 +99,6 @@ document.getElementById('invioCollapse')
 
 if(editModal){
     editModal.addEventListener('show.bs.modal', event => {
-        const dataOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
         const idArticoloMagazzino = event.relatedTarget.getAttribute('data-bs-whatever');
         const catArticoloSel = document.getElementById("categoriaUpdate");
         const sottocatArticoloSel = document.getElementById("sottocategoriaUpdate");
@@ -111,7 +110,63 @@ if(editModal){
         const dataMovimentoInput = document.getElementById("dataMovimentoArticoloUpdate");
         const dataScadenzaInput = document.getElementById("dataScadenzaArticoloUpdate");
         const fornitoreArticoloSel = document.getElementById("fornitoreArticoloUpdate");
-        
+
+        catArticoloSel.innerHTML = "";        
+        sottocatArticoloSel.innerHTML = "";
+        articoloSel.innerHTML = "";
+        quantitaArticoloInput.innerHTML = "";
+        unitaArticolo.innerHTML = "";
+        lottoArticoloInput.innerHTML = "";
+        prezzoArticoloInput.innerHTML = "";
+        dataMovimentoInput.value = "";
+        dataScadenzaInput.value = "";
+        fornitoreArticoloSel.innerHTML = "";
+
+        catArticoloSel.addEventListener("change", ()=>{
+            articoloSel.innerHTML = `<option class="d-none" value="" selected>Articolo</option>`;
+            articoloSel.disabled = true;
+            sottocatArticoloSel.innerHTML = `<option class="d-none" value="" selected>Sottocategoria</option>`;
+            unitaArticolo.value = "";
+
+            sottocategoria(catArticoloSel.value)
+            .then(sottocategorie =>{
+                sottocategorie.forEach(sottocategoria =>{
+                    const newOption = document.createElement('option');
+                    newOption.textContent = sottocategoria.sottocategoria;
+                    newOption.value = sottocategoria.id_sottocategoria;
+                    sottocatArticoloSel.appendChild(newOption);
+                })
+            })
+        })
+
+        sottocatArticoloSel.addEventListener("change", ()=>{
+            articoloSel.innerHTML = `<option class="d-none" value="" selected>Articolo</option>`;
+            unitaArticolo.value = "";
+            
+            listaArticoli(sottocatArticoloSel.value)
+            .then(articoli => {
+                if(articoli.length > 0){
+                    articoli.forEach(articolo =>{
+                        const newOption = document.createElement('option');
+                        newOption.textContent = articolo.nome_articolo;
+                        newOption.value = articolo.id_articolo;
+                        newOption.dataset.idUnita = articolo.id_unita_misura;
+                        articoloSel.appendChild(newOption);
+                    })
+                    articoloSel.disabled = false;
+                }
+            })
+        })
+        articoloSel.addEventListener("change", ()=>{
+            unitaArticolo.value = "";
+            let articoloSelezionato = articoloSel.options[articoloSel.selectedIndex];
+            if(!articoloSelezionato.dataset.idUnita ||articoloSelezionato.dataset.idUnita !=="null" ){
+                unitaByid(articoloSelezionato.dataset.idUnita)
+                .then(dati=>{
+                unitaArticolo.value = dati;
+                })
+            }
+        })
 
         fetch(`${pagePath}edit/${idArticoloMagazzino}`)
         .then(response => response.json())
@@ -120,16 +175,22 @@ if(editModal){
             articoloById(articoliMagazzino.id_articolo)
             .then(dati => {
                 const [articolo] = dati;
-                console.log(articolo);
-                console.log(articoliMagazzino);
-
+                
                 quantitaArticoloInput.value = articoliMagazzino.quantita_movimento;
                 lottoArticoloInput.value = articoliMagazzino.codice_lotto_articolo != null ?  articoliMagazzino.codice_lotto_articolo : "";
                 prezzoArticoloInput.value = articoliMagazzino.prezzo_articolo != null ? articoliMagazzino.prezzo_articolo : "";
-                //problema con il caricamento delle ore 
-                dataMovimentoInput.valueAsDate = new Date(articoliMagazzino.data_movimento);
-                dataScadenzaInput.valueAsDate = new Date(articoliMagazzino.data_scadenza);
+            
+                const utcDataMovimento = new Date(articoliMagazzino.data_movimento);
+                const timeOffSet = 2 * 60 * 60 * 1000;
+                dataMovimentoInput.valueAsDate = new Date(utcDataMovimento.getTime()+timeOffSet);
 
+
+                if(articoliMagazzino.data_scadenza !== null){
+                    const utcDataScadenza = new Date(articoliMagazzino.data_scadenza) ||null;
+                    dataScadenzaInput.valueAsDate =  new Date(utcDataScadenza.getTime()+timeOffSet);
+                }else{
+                    dataScadenzaInput.value="";
+                }
                 categorie()
                 .then (categorie =>{
                     categorie.forEach(categoria =>{
@@ -161,25 +222,41 @@ if(editModal){
                         articoloSel.appendChild(newOption);
                     })
                     articoloSel.value = articoliMagazzino.id_articolo;
+                    let articoloSelezionato = articoloSel.options[articoloSel.selectedIndex];
+                    if(!articoloSelezionato.dataset.idUnita ||articoloSelezionato.dataset.idUnita !=="null" ){
+                        unitaByid(articoloSelezionato.dataset.idUnita)
+                        .then(dati=>{
+                        unitaArticolo.value = dati;
+                        })
+                    }else{
+                        unitaArticolo.value = "";
+                    }
+                    
                 })
-                
-
-                
+                listaCF()
+                .then(dati =>{
+                    dati.forEach(fornitore =>{
+                        const newOption = document.createElement('option');
+                        newOption.textContent = fornitore.ragione_sociale;
+                        newOption.value = fornitore.id_cliente_fornitore;
+                        fornitoreArticoloSel.appendChild(newOption);
+                    })
+                    fornitoreArticoloSel.value = articoliMagazzino.id_fornitore;
+                })
     
             });
             
-            
-
-
         })
+        document.getElementById("formUpdate")
+        .action = `${pagePath}update/${idArticoloMagazzino}`;
         
     })
 }
 
 if(deleteModal){
     deleteModal.addEventListener('show.bs.modal', event => {
-        const idArticolo = event.relatedTarget.getAttribute('data-bs-whatever');
+        const idArticoloMagazzino = event.relatedTarget.getAttribute('data-bs-whatever');
         document.getElementById("formDelete")     
-        .action = pagePath + `delete/${idArticolo}`;   
+        .action = pagePath + `delete/${idArticoloMagazzino}`;   
     })  
   };

@@ -42,33 +42,40 @@ exports.getArticoloById = async (req, res, next) => {
   let idArticoloMagazzino = req.params.id;
 
   let [articolo, _] = await MagazzinoArticoli.trovaById(idArticoloMagazzino);
+  console.log(articolo);
 
   res.status(200).json({dati : articolo});
 
 };
 
 exports.aggiornaArticoloMagazzino = async (req, res, next) => {
-  
-  let idArticoloMagazzino = req.params.id;
-  let  idArticolo = req.body.articoloUpdate;
-  let dataMovimento = req.body.dataMovimentoArticoloUpdate; 
-  let quantitaMovimento = req.body.quantitaArticoloUpdate; 
-  let prezzoArticolo = req.body.prezzoArticoloUpdate;
-  let lottoArticolo = req.body.lottoArticoloUpdate;
-  let dataScadenza = req.body.dataScadenzaArticoloUpdate;
-  let idFornitoreCliente = req.body.fornitoreArticoloUpdate;
+  try{
+    const idArticoloMagazzino = req.params.id;
+    const idArticolo = req.body.articoloUpdate;
+    const dataMovimento = new Date(req.body.dataMovimentoArticoloUpdate); 
+    const quantitaMovimento = req.body.quantitaArticoloUpdate; 
+    const prezzoArticolo = req.body.prezzoArticoloUpdate || null;
+    const lottoArticolo = req.body.lottoArticoloUpdate || null;
+    const dataScadenza = req.body.dataScadenzaArticoloUpdate != "" ? new Date (req.body.dataScadenzaArticoloUpdate) : null ;
+    const idFornitoreCliente = req.body.fornitoreArticoloUpdate;
 
-  //controlli da insererire
-  await MagazzinoArticoli.aggiornaArticoloMagazzino(
-    idFornitoreCliente,
+    console.log(idArticoloMagazzino,idArticolo,dataMovimento,quantitaMovimento,prezzoArticolo,lottoArticolo,dataScadenza,idFornitoreCliente)
+    //controlli da insererire
+
+    await MagazzinoArticoli.update(
     idArticoloMagazzino,
     idArticolo,
     dataMovimento,
     quantitaMovimento,
     prezzoArticolo,
     lottoArticolo,
-    dataScadenza
+    dataScadenza,
+    idFornitoreCliente
     );
+    res.redirect("/"); 
+  }catch (error) {
+    next(error);
+  }
   
 }
 
