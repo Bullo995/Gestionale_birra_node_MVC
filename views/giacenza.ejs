@@ -1,0 +1,138 @@
+<%- include('template/header') %>
+<%- include('template/nav') %>
+
+<div class="container-fluid">
+    <div class="container-fluid border my-5 p-3">
+        <h1 class="display-1 text-center "> Giacenze</h1>
+    </div>
+
+    <% if (totArticoli) { %>
+        <h3 class="display-5 text-center "> Giacenza Articolo</h1>
+
+            <div class="table-responsive mb-5">
+                <table class="table table-secondary table-striped-columns accordion accordion-flush w-auto m-auto ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Articolo</th>
+                            <th scope="col">Quantita</th>
+                            <th scope="col">Capienza</th>
+                            <th scope="col">Totale</th>
+                                          
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <% totArticoli.forEach(element => { %>
+                               
+                                <tr >
+                                    <th scope="col"><%= element.nome_articolo %></th>
+                                    <th scope="col"><%= element.quantita %></th>
+                                    <th scope="col "><%= element.capienza !== null ? element.capienza : " // " %></th>
+                                    <th scope="col"><%= element.totale %></th>                             
+                                </tr>
+
+                        <% }) %> 
+                    </tbody>
+                </table>
+            </div>
+          
+    <% } %>
+
+    <% if (totProdotti) { %>
+        <h1 class="display-5 text-center "> Giacenza Prodotto</h1>
+        <div class="table-responsive mb-5">
+            <table class="table table-secondary table-striped-columns accordion accordion-flush w-auto m-auto ">
+                <thead>
+                    <tr>
+                        <th scope="col">Prodotto</th>
+                        <th scope="col">Quantita</th>  
+                        <th scope="col">Capienza</th>
+                        <th scope="col">Totale</th>              
+                    </tr>
+                </thead>
+                <tbody>
+                    <% totProdotti.forEach(element => { %>
+                           
+                            <tr >
+                                <th scope="col"><%= element.nome_prodotto %></th>
+                                <th scope="col"><%= element.quantita %></th>
+                                <th scope="col"><%= element.capienza %></th>
+                                <th scope="col"><%= element.totale %></th>
+                            </tr>
+                                               
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+      
+    <% } %>
+
+    <% if (lottoArticoli) { %>
+        <h1 class="display-5 text-center "> Giacenza Articolo Lotto</h1>
+        <div class="table-responsive mb-5">
+            <table class="table table-secondary table-striped-columns accordion accordion-flush w-auto m-auto ">
+                <thead>
+                    <tr>
+                        <th scope="col">Articolo</th>
+                        <th scope="col">Lotto</th>
+                        <th scope="col">Quantita</th>
+                        <th scope="col">Unita misura</th>
+                        <th scope="col">Totale</th>
+                                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <% lottoArticoli.forEach(element => { %>
+                           
+                            <tr >
+                                <th scope="col"><%= element.nome_articolo %></th>
+                                <th scope="col"><%= element.codice_lotto_articolo %></th>
+                                <th scope="col"><%= element.quantita %></th>
+                                <th scope="col"><%= element.unita_misura %></th>
+                                <th scope="col"><%= element.totale %></th>
+                            </tr>
+                                               
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+      
+    <% } %>
+
+    <% if (lottoProdotti) { %>
+        <h1 class="display-5 text-center "> Giacenza prodotto lotto</h1>d
+        <div class="table-responsive mb-5">
+            <table class="table table-secondary table-striped-columns accordion accordion-flush w-auto m-auto ">
+                <thead>
+                    <tr>
+                        <th scope="col">Prodotto</th>
+                        <th scope="col">Lotto</th>
+                        <th scope="col">Quantita</th>
+                        <th scope="col">Unita misura</th>
+                        <th scope="col">Totale</th>              
+                    </tr>
+                </thead>
+                <tbody>
+                    <% lottoProdotti.forEach(element => { %>
+                           
+                            <tr >
+                                <th scope="col"><%= element.nome_prodotto %></th>
+                                <th scope="col"><%= element.codice_lotto %></th>
+                                <th scope="col"><%= element.quantita %></th>
+                                <th scope="col"><%= element.unita_misura %></th>
+                                <th scope="col"><%= element.totale %></th>
+                            </tr>
+                                               
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+      
+    <% } %>
+
+    
+</div>
+
+
+
+
+<%- include('template/footer') %>

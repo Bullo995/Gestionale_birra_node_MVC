@@ -8,8 +8,9 @@ const listaArticoliRoute = require('./routes/listaArticoliRoutes');
 const listaProdottiRoute = require('./routes/listaProdottiRoutes');
 const lottiProduzioneRoute = require('./routes/lottiProduzioneRoutes');
 const magazzinoArticoliRoute = require('./routes/magazzinoArticoliRoutes');
+const giacenzaRoute = require(`./routes/giacenza`);
 
-const port = 3000;
+const port = 8000;
 
 const path = require('path');
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +24,8 @@ app.use('/anagraficaClientiFornitori', anagraficaCFroute);
 app.use('/gestioneRisorse', gestioneRisorseRoute);
 app.use('/listaProdotti', listaProdottiRoute);
 app.use('/lottiProduzione', lottiProduzioneRoute);
+app.use('/giacenza', giacenzaRoute);
+
 
 app.set('view engine', 'ejs');
 
@@ -37,7 +40,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-
+ 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
